@@ -1,0 +1,1009 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Thymeleaf | 南藤北玄参</title>
+<meta name="description" content="唯沉默为最高的轻蔑" />
+<link rel="shortcut icon" href="https://nanteng.github.io/favicon.ico">
+<link rel="stylesheet" href="https://nanteng.github.io/styles/main.css">
+
+<script src="https://nanteng.github.io/media/js/jquery.min.js"></script>
+<script src="https://nanteng.github.io/media/js/masonry.pkgd.min.js"></script>
+<script src="https://nanteng.github.io/media/js/aos.js"></script>
+<script src="https://nanteng.github.io/media/js/pace.min.js"></script>
+<script src="https://nanteng.github.io/media/js/view-image.min.js"></script>
+<script src="https://nanteng.github.io/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://nanteng.github.io/media/js/functions.js"></script>
+    <meta name="referrer" content="never">
+    <meta name="description" content="MVC
+提出问题
+
+我们对HTML的新的期待：既能够正常显示页面，又能在页面中包含动态数据部分。而动态数据单靠HTML本身是无法做到的，所以此时我们需要引入服务器端动态视图模板技术。
+从三层结构到MVC
+MVC概念
+M：Model模型
+V：..." />
+    <meta name="keywords" content="Java" />
+    <script src="https://nanteng.github.io/media/js/waterfall.min.js"></script>
+    <script src="https://nanteng.github.io/media/js/prism.min.js"></script>
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://nanteng.github.io"><img src="\media\images\custom-headerLogo.gif" alt=""></a>
+            </div>
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                <li class=""><a href="https://nanteng.github.io" class="menu">首页</a></li>
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="https://cloud.dearkai.cn" class="menu">
+                      云盘
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/about" class="menu">
+                      关于
+                    </a>
+                  </li>
+                
+                <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox" class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+              </ul>
+            </nav>
+            <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i class="fa fa-search-line"></i></a>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+      <div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+        <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+          <div class="search-wrapper section">
+            <form id="gridea-search-form" data-update="1668567925322" action="/search/index.html" class="search-form" _lpchecked="1">
+              <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..." required="">
+              <button type="submit" class="submit" aria-label="Submit">
+                <i class="fa fa-search-line"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/20221108_231914.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2022-11-10"><i class="fa fa-calendar"></i><span class="lately">6 天前</span></time>
+              
+              <a href="https://nanteng.github.io/post/thymeleaf/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/thymeleaf/"> </span>
+              </a>
+              <span id="/thymeleaf/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://nanteng.github.io/tag/TtKdK6ur-/" class="ctag ctag-0 ctag-TtKdK6ur-" aria-label="">Java</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">Thymeleaf</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h2 id="mvc">MVC</h2>
+<h3 id="提出问题">提出问题</h3>
+<figure data-type="image" tabindex="1"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/img002.07bcf17c.png" alt="./images" loading="lazy"></figure>
+<p>我们对HTML的新的期待：既能够正常显示页面，又能在页面中包含动态数据部分。而动态数据单靠HTML本身是无法做到的，所以此时我们需要引入服务器端动态视图模板技术。</p>
+<h3 id="从三层结构到mvc">从三层结构到MVC</h3>
+<h4 id="mvc概念">MVC概念</h4>
+<p>M：Model模型</p>
+<p>V：View视图</p>
+<p>C：Controller控制器</p>
+<p>MVC是在表述层开发中运用的一种设计理念。主张把<strong>封装数据的『模型』</strong>、<strong>显示用户界面的『视图』</strong>、**协调调度的『控制器』**分开。</p>
+<p>好处:</p>
+<ul>
+<li>进一步实现各个组件之间的解耦</li>
+<li>让各个组件可以单独维护</li>
+<li>将视图分离出来以后，我们后端工程师和前端工程师的对接更方便</li>
+</ul>
+<h3 id="mvc和三层架构之间关系">MVC和三层架构之间关系</h3>
+<figure data-type="image" tabindex="2"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/img003.0794a390.png" alt="./images" loading="lazy"></figure>
+<h3 id="前后端工程师对接方式">前后端工程师对接方式</h3>
+<ul>
+<li>服务器端渲染：前端工程师把前端页面一整套做好交给后端工程师</li>
+<li>前后端分离：开会商量JSON格式，然后分头开发。在后端程序尚不可用时，前端工程师会使用Mock.js生成假数据使用，在后端程序可用后再连接实际后端程序获取真实数据。</li>
+</ul>
+<figure data-type="image" tabindex="3"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/img004.59c27901.png" alt="./images" loading="lazy"></figure>
+<h2 id="thymeleaf简介">Thymeleaf简介</h2>
+<h3 id="thymeleaf的同行">Thymeleaf的同行</h3>
+<p>JSP、Freemarker、Velocity等等，它们有一个共同的名字：<strong>服务器端模板技术</strong>。</p>
+<h3 id="thymeleaf官方文档中的介绍">Thymeleaf官方文档中的介绍</h3>
+<p>https://www.thymeleaf.org/</p>
+<p>http://heavy_code_industry.gitee.io/code_heavy_industry/pro001-javaweb/lecture/chapter08/Thymeleaf-3.0.11.pdf</p>
+<h3 id="thymeleaf优势">Thymeleaf优势</h3>
+<ul>
+<li>SpringBoot官方推荐使用的视图模板技术，和SpringBoot完美整合。</li>
+<li>不经过服务器运算仍然可以直接查看原始值，对前端工程师更友好。</li>
+</ul>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;p th:text=&quot;${hello}&quot;&gt;Original Value&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="物理视图和逻辑视图">物理视图和逻辑视图</h3>
+<h5 id="物理视图">物理视图</h5>
+<p>在Servlet中，将请求转发到一个HTML页面文件时，使用的完整的转发路径就是<strong>物理视图</strong>。</p>
+<figure data-type="image" tabindex="4"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/download.png" alt="download" loading="lazy"></figure>
+<blockquote>
+<p>/pages/user/login_success.html</p>
+</blockquote>
+<p>如果我们把所有的HTML页面都放在某个统一的目录下，那么转发地址就会呈现出明显的规律：</p>
+<blockquote>
+<p>/pages/user/login.html</p>
+<p>/pages/user/login_success.html</p>
+<p>/pages/user/regist.html</p>
+<p>/pages/user/regist_success.html</p>
+<p>……</p>
+</blockquote>
+<p>路径的开头都是：/pages/user/</p>
+<p>路径的结尾都是：.html</p>
+<p>所以，路径开头的部分我们称之为<strong>视图前缀</strong>，路径结尾的部分我们称之为<strong>视图后缀</strong>。</p>
+<h5 id="逻辑视图">逻辑视图</h5>
+<p>物理视图=视图前缀+逻辑视图+视图后缀</p>
+<p>上面的例子中：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">视图前缀</th>
+<th style="text-align:center">逻辑视图</th>
+<th style="text-align:center">视图后缀</th>
+<th style="text-align:center">物理视图</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">/pages/user/</td>
+<td style="text-align:center">login</td>
+<td style="text-align:center">.html</td>
+<td style="text-align:center">/pages/user/login.html</td>
+</tr>
+<tr>
+<td style="text-align:center">/pages/user/</td>
+<td style="text-align:center">login_success</td>
+<td style="text-align:center">.html</td>
+<td style="text-align:center">/pages/user/login_success.html</td>
+</tr>
+</tbody>
+</table>
+<h2 id="引入thymeleaf环境">引入Thymeleaf环境</h2>
+<h3 id="加入jar包">加入jar包</h3>
+<figure data-type="image" tabindex="5"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/download2.png" alt="download2" loading="lazy"></figure>
+<h3 id="配置上下文参数">配置上下文参数</h3>
+<figure data-type="image" tabindex="6"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/download3.png" alt="download3" loading="lazy"></figure>
+<figure data-type="image" tabindex="7"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/downloa1d.png" alt="downloa1d" loading="lazy"></figure>
+<p>物理视图=视图前缀+逻辑视图+视图后缀</p>
+<pre><code class="language-xml">&lt;!-- 在上下文参数中配置视图前缀和视图后缀 --&gt;
+&lt;context-param&gt;
+    &lt;param-name&gt;view-prefix&lt;/param-name&gt;
+    &lt;param-value&gt;/WEB-INF/view/&lt;/param-value&gt;
+&lt;/context-param&gt;
+&lt;context-param&gt;
+    &lt;param-name&gt;view-suffix&lt;/param-name&gt;
+    &lt;param-value&gt;.html&lt;/param-value&gt;
+&lt;/context-param&gt;
+</code></pre>
+<p>说明：param-value中设置的前缀、后缀的值不是必须叫这个名字，可以根据实际情况和需求进行修改。</p>
+<blockquote>
+<p>为什么要放在WEB-INF目录下？</p>
+<p>原因：WEB-INF目录不允许浏览器直接访问，所以我们的视图模板文件放在这个目录下，是一种保护。以免外界可以随意访问视图模板文件。</p>
+<p>访问WEB-INF目录下的页面，都必须通过Servlet转发过来，简单说就是：不经过Servlet访问不了。</p>
+<p>这样就方便我们在Servlet中检查当前用户是否有权限访问。</p>
+<p>那放在WEB-INF目录下之后，重定向进不去怎么办？</p>
+<p>重定向到Servlet，再通过Servlet转发到WEB-INF下。</p>
+</blockquote>
+<h3 id="创建servlet基类">创建Servlet基类</h3>
+<p>这个类直接<strong>复制粘贴</strong>即可，将来使用框架后，这些代码都将被取代。</p>
+<pre><code class="language-java">import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.WebContext;
+import org.thymeleaf.templatemode.TemplateMode;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+public class ViewBaseServlet extends HttpServlet {
+
+    private TemplateEngine templateEngine;
+
+    @Override
+    public void init() throws ServletException {
+
+        // 1.获取ServletContext对象
+        ServletContext servletContext = this.getServletContext();
+
+        // 2.创建Thymeleaf解析器对象
+        ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver(servletContext);
+
+        // 3.给解析器对象设置参数
+        // ①HTML是默认模式，明确设置是为了代码更容易理解
+        templateResolver.setTemplateMode(TemplateMode.HTML);
+
+        // ②设置前缀
+        String viewPrefix = servletContext.getInitParameter(&quot;view-prefix&quot;);
+
+        templateResolver.setPrefix(viewPrefix);
+
+        // ③设置后缀
+        String viewSuffix = servletContext.getInitParameter(&quot;view-suffix&quot;);
+
+        templateResolver.setSuffix(viewSuffix);
+
+        // ④设置缓存过期时间（毫秒）
+        templateResolver.setCacheTTLMs(60000L);
+
+        // ⑤设置是否缓存
+        templateResolver.setCacheable(true);
+
+        // ⑥设置服务器端编码方式
+        templateResolver.setCharacterEncoding(&quot;utf-8&quot;);
+
+        // 4.创建模板引擎对象
+        templateEngine = new TemplateEngine();
+
+        // 5.给模板引擎对象设置模板解析器
+        templateEngine.setTemplateResolver(templateResolver);
+
+    }
+
+    protected void processTemplate(String templateName, HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        // 1.设置响应体内容类型和字符集
+        resp.setContentType(&quot;text/html;charset=UTF-8&quot;);
+
+        // 2.创建WebContext对象
+        WebContext webContext = new WebContext(req, resp, getServletContext());
+
+        // 3.处理模板数据
+        templateEngine.process(templateName, webContext, resp.getWriter());
+    }
+}
+</code></pre>
+<h3 id="helloworld">HelloWorld</h3>
+<h4 id="创建indexhtml">创建index.html</h4>
+<figure data-type="image" tabindex="8"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/downloa2d.png" alt="downloa2d" loading="lazy"></figure>
+<h4 id="在indexhtml编写超链接">在index.html编写超链接</h4>
+<pre><code class="language-html">&lt;a href=&quot;/view/TestThymeleafServlet&quot;&gt;初步测试Thymeleaf&lt;/a&gt;
+</code></pre>
+<h4 id="创建servlet">创建Servlet</h4>
+<figure data-type="image" tabindex="9"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/downloa3d.png" alt="downloa3d" loading="lazy"></figure>
+<pre><code class="language-xml">&lt;servlet&gt;
+    &lt;servlet-name&gt;TestThymeleafServlet&lt;/servlet-name&gt;
+    &lt;servlet-class&gt;com.atguigu.thymeleaf.servlet.TestThymeleafServlet&lt;/servlet-class&gt;
+&lt;/servlet&gt;
+&lt;servlet-mapping&gt;
+    &lt;servlet-name&gt;TestThymeleafServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/TestThymeleafServlet&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+<h4 id="修改servlet继承的父类">修改Servlet继承的父类</h4>
+<figure data-type="image" tabindex="10"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/downloa4d.png" alt="downloa4d" loading="lazy"></figure>
+<h4 id="在doget方法中跳转到thymeleaf页面">在doGet()方法中跳转到Thymeleaf页面</h4>
+<pre><code class="language-java">protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    // 1.声明当前请求要前往的视图名称
+    String viewName = &quot;target&quot;;
+    
+    // 2.调用ViewBaseServlet父类中的解析视图模板的方法
+    super.processTemplate(viewName, request, response);
+    
+}
+</code></pre>
+<h4 id="thymeleaf页面">Thymeleaf页面</h4>
+<pre><code class="language-xml">&lt;!DOCTYPE html&gt;
+
+&lt;!-- 在html标签内加入Thymeleaf名称空间的声明 --&gt;
+&lt;html lang=&quot;en&quot; xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;!-- 在p标签的基础上，使用Thymeleaf的表达式，解析了一个URL地址 --&gt;
+    &lt;p th:text=&quot;@{'/aaa/bbb/ccc'}&quot;&gt;Thymeleaf将在这里显示一个解析出来的URL地址&lt;/p&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h2 id="基本语法">基本语法</h2>
+<h3 id="th名称空间">th名称空间</h3>
+<figure data-type="image" tabindex="11"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/img011.f6f1e569.png" alt="images" loading="lazy"></figure>
+<h3 id="表达式语法">表达式语法</h3>
+<h4 id="修改标签文本值">修改标签文本值</h4>
+<p>代码实例:</p>
+<pre><code class="language-html">&lt;p th:text=&quot;标签体新值&quot;&gt;标签体原始值&lt;/p&gt;
+</code></pre>
+<h5 id="thtext作用">th:text作用</h5>
+<ul>
+<li>不经过服务器解析，直接用浏览器打开HTML文件，看到的是『标签体原始值』</li>
+<li>经过服务器解析，Thymeleaf引擎根据th:text属性指定的『标签体新值』去<strong>替换</strong>『标签体原始值』</li>
+</ul>
+<h5 id="字面量">字面量</h5>
+<p>『字面量』是一个经常会遇到的概念，我们可以对照『变量』来理解它的含义。</p>
+<pre><code class="language-java">// a是变量，100是字面量
+int a = 100;
+System.out.println(&quot;a = &quot; + a);
+</code></pre>
+<ul>
+<li>变量：变量名字符串本身不是它的值，它指向的才是它的值</li>
+<li>字面量：它就是字面上的含义，我们从『字面』上看到的直接就是它的值</li>
+</ul>
+<p>现在我们在th:text属性中使用的就是『字面量』，它<strong>不指代任何其他值</strong>。</p>
+<h4 id="修改指定属性值">修改指定属性值</h4>
+<p>代码示例:</p>
+<pre><code class="language-html">&lt;input type=&quot;text&quot; name=&quot;username&quot; th:value=&quot;文本框新值&quot; value=&quot;文本框旧值&quot; /&gt;
+</code></pre>
+<p>语法：任何HTML标签原有的属性，前面加上『th:』就都可以通过Thymeleaf来设定新值。</p>
+<h4 id="解析url地址">解析URL地址</h4>
+<h5 id="基本语法-2">基本语法</h5>
+<p>代码示例:</p>
+<pre><code class="language-html">&lt;p th:text=&quot;@{/aaa/bbb/ccc}&quot;&gt;标签体原始值&lt;/p&gt;
+</code></pre>
+<blockquote>
+<p>/view/aaa/bbb/ccc</p>
+</blockquote>
+<p>所以@{}的作用是<strong>在字符串前附加『上下文路径』</strong></p>
+<blockquote>
+<p>这个语法的好处是：实际开发过程中，项目在不同环境部署时，Web应用的名字有可能发生变化。所以上下文路径不能写死。而通过@{}动态获取上下文路径后，不管怎么变都不怕啦！</p>
+</blockquote>
+<h5 id="首页使用url地址解析">首页使用URL地址解析</h5>
+<p><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/img018.3954c282.png" alt="./images" loading="lazy">如果我们直接访问index.html本身，那么index.html是不需要通过Servlet，当然也不经过模板引擎，所以index.html上的Thymeleaf的任何表达式都不会被解析。</p>
+<p>解决办法：通过Servlet访问index.html，这样就可以让模板引擎渲染页面了：</p>
+<figure data-type="image" tabindex="12"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/img019.7663465a.png" alt="./images" loading="lazy"></figure>
+<blockquote>
+<p>进一步的好处：</p>
+<p>通过上面的例子我们看到，所有和业务功能相关的请求都能够确保它们通过Servlet来处理，这样就方便我们统一对这些请求进行特定规则的限定。</p>
+</blockquote>
+<h5 id="给url地址后面附加请求参数">给URL地址后面附加请求参数</h5>
+<p>参照官方文档说明：</p>
+<figure data-type="image" tabindex="13"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/img037.78b02342.png" alt="./images" loading="lazy"></figure>
+<h4 id="直接执行表达式">直接执行表达式</h4>
+<p>Servlet代码:</p>
+<pre><code class="language-java">request.setAttribute(&quot;reqAttrName&quot;, &quot;&lt;span&gt;hello-value&lt;/span&gt;&quot;);
+</code></pre>
+<p>页面代码</p>
+<pre><code class="language-html">    &lt;p&gt;有转义效果：[[${reqAttrName}]]&lt;/p&gt;
+    &lt;p&gt;无转义效果：[(${reqAttrName})]&lt;/p&gt;
+</code></pre>
+<p>执行效果:</p>
+<pre><code class="language-html">    &lt;p&gt;有转义效果：&amp;lt;span&amp;gt;hello-value&amp;lt;/span&amp;gt;&lt;/p&gt;
+    &lt;p&gt;无转义效果：&lt;span&gt;hello-value&lt;/span&gt;&lt;/p&gt;
+</code></pre>
+<h3 id="访问域对象">访问域对象</h3>
+<h4 id="域对象">域对象</h4>
+<h5 id="请求域">请求域</h5>
+<p>在请求转发的场景下，我们可以借助HttpServletRequest对象内部给我们提供的存储空间，帮助我们携带数据，把数据发送给转发的目标资源。</p>
+<p>请求域：HttpServletRequest对象内部给我们提供的存储空间</p>
+<figure data-type="image" tabindex="14"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/img012.8cffceee.png" alt="./images" loading="lazy"></figure>
+<h5 id="会话域">会话域</h5>
+<figure data-type="image" tabindex="15"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/img013.0fde173c.png" alt="./images" loading="lazy"></figure>
+<h5 id="应用域">应用域</h5>
+<figure data-type="image" tabindex="16"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/img014.26733437.png" alt="./images" loading="lazy"></figure>
+<blockquote>
+<p>PS：在我们使用的视图是JSP的时候，域对象有4个</p>
+<ul>
+<li>pageContext</li>
+<li>request：请求域</li>
+<li>session：会话域</li>
+<li>application：应用域</li>
+</ul>
+<p>所以在JSP的使用背景下，我们可以说域对象有4个，现在使用Thymeleaf了，没有pageContext。</p>
+</blockquote>
+<h4 id="在servlet中将数据存入属性域">在Servlet中将数据存入属性域</h4>
+<h5 id="操作请求域">操作请求域</h5>
+<p>Servlet中代码：</p>
+<pre><code class="language-java">String requestAttrName = &quot;helloRequestAttr&quot;;
+String requestAttrValue = &quot;helloRequestAttr-VALUE&quot;;
+
+request.setAttribute(requestAttrName, requestAttrValue);
+</code></pre>
+<p>Thymeleaf表达式：</p>
+<pre><code class="language-html">&lt;p th:text=&quot;${helloRequestAttr}&quot;&gt;request field value&lt;/p&gt;
+</code></pre>
+<h5 id="操作会话域">操作会话域</h5>
+<p>Servlet中的代码:</p>
+<pre><code class="language-java">// ①通过request对象获取session对象
+HttpSession session = request.getSession();
+
+// ②存入数据
+session.setAttribute(&quot;helloSessionAttr&quot;, &quot;helloSessionAttr-VALUE&quot;);
+</code></pre>
+<p>Thymeleaf表达式：</p>
+<pre><code class="language-html">&lt;p th:text=&quot;${session.helloSessionAttr}&quot;&gt;这里显示会话域数据&lt;/p&gt;
+</code></pre>
+<h5 id="操作应用域">操作应用域</h5>
+<p>Servlet中代码</p>
+<pre><code class="language-java">// ①通过调用父类的方法获取ServletContext对象
+ServletContext servletContext = getServletContext();
+
+// ②存入数据
+servletContext.setAttribute(&quot;helloAppAttr&quot;, &quot;helloAppAttr-VALUE&quot;);
+</code></pre>
+<p>Thymeleaf表达式：</p>
+<pre><code class="language-html">&lt;p th:text=&quot;${application.helloAppAttr}&quot;&gt;这里显示应用域数据&lt;/p&gt;
+</code></pre>
+<h3 id="获取请求参数">获取请求参数</h3>
+<p>具体来说，我们这里探讨的是在页面上（模板页面）获取请求参数。底层机制是：</p>
+<figure data-type="image" tabindex="17"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/img020.05a00595.png" alt="./images" loading="lazy"></figure>
+<h4 id="一个名字一个值">一个名字一个值</h4>
+<p>页面代码:</p>
+<pre><code class="language-html">&lt;p th:text=&quot;${param.username}&quot;&gt;这里替换为请求参数的值&lt;/p&gt;
+</code></pre>
+<p>页面显示效果：</p>
+<figure data-type="image" tabindex="18"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/downloa5d.png" alt="downloa5d" loading="lazy"></figure>
+<h4 id="一个名字多个值">一个名字多个值</h4>
+<p>页面代码:</p>
+<pre><code class="language-html">&lt;p th:text=&quot;${param.team}&quot;&gt;这里替换为请求参数的值&lt;/p&gt;
+</code></pre>
+<p>页面显式效果:</p>
+<figure data-type="image" tabindex="19"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/downloa6d.png" alt="downloa6d" loading="lazy"></figure>
+<p>如果想要精确获取某一个值,可以使用数组下标.页面代码:</p>
+<pre><code class="language-html">&lt;p th:text=&quot;${param.team[0]}&quot;&gt;这里替换为请求参数的值&lt;/p&gt;
+&lt;p th:text=&quot;${param.team[1]}&quot;&gt;这里替换为请求参数的值&lt;/p&gt;
+</code></pre>
+<p>页面显式效果:</p>
+<figure data-type="image" tabindex="20"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/downloa7d.png" alt="downloa7d" loading="lazy"></figure>
+<h3 id="内置对象">内置对象</h3>
+<h4 id="概念">概念</h4>
+<p>所谓内置对象其实就是在表达式中<strong>可以直接使用</strong>的对象。</p>
+<h4 id="基本内置对象">基本内置对象</h4>
+<figure data-type="image" tabindex="21"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/img021.98446d22.png" alt="./images" loading="lazy"></figure>
+<p>用法举例:</p>
+<pre><code class="language-html">&lt;h3&gt;表达式的基本内置对象&lt;/h3&gt;
+&lt;p th:text=&quot;${#request.getClass().getName()}&quot;&gt;这里显示#request对象的全类名&lt;/p&gt;
+&lt;p th:text=&quot;${#request.getContextPath()}&quot;&gt;调用#request对象的getContextPath()方法&lt;/p&gt;
+&lt;p th:text=&quot;${#request.getAttribute('helloRequestAttr')}&quot;&gt;调用#request对象的getAttribute()方法，读取属性域&lt;/p&gt;
+</code></pre>
+<p>基本思路:</p>
+<ul>
+<li>如果不清楚这个对象有哪些方法可以使用，那么就通过getClass().getName()获取全类名，再回到Java环境查看这个对象有哪些方法</li>
+<li>内置对象的方法可以直接调用</li>
+<li>调用方法时需要传参的也可以直接传入参数</li>
+</ul>
+<h4 id="公共内置对象">公共内置对象</h4>
+<p><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/img022.b5d6690d.png" alt="./images" loading="lazy">Servlet中将List集合数据存入请求域：</p>
+<pre><code class="language-java">request.setAttribute(&quot;aNotEmptyList&quot;, Arrays.asList(&quot;aaa&quot;,&quot;bbb&quot;,&quot;ccc&quot;));
+request.setAttribute(&quot;anEmptyList&quot;, new ArrayList&lt;&gt;());
+</code></pre>
+<p>页面代码：</p>
+<pre><code class="language-html">&lt;p&gt;#list对象isEmpty方法判断集合整体是否为空aNotEmptyList：&lt;span th:text=&quot;${#lists.isEmpty(aNotEmptyList)}&quot;&gt;测试#lists&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;#list对象isEmpty方法判断集合整体是否为空anEmptyList：&lt;span th:text=&quot;${#lists.isEmpty(anEmptyList)}&quot;&gt;测试#lists&lt;/span&gt;&lt;/p&gt;
+</code></pre>
+<p>公共内置对象对应的源码位置：</p>
+<figure data-type="image" tabindex="22"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/img023.b592213a.png" alt="./images" loading="lazy"></figure>
+<h3 id="中的表达式本质是ognl">${}中的表达式本质是OGNL</h3>
+<h4 id="ognl">OGNL</h4>
+<p>OGNL :  Object-Graph Navigation Language对象-图 导航语言</p>
+<h4 id="对象图">对象图</h4>
+<p>从根对象触发，通过特定的语法，逐层访问对象的各种属性。</p>
+<figure data-type="image" tabindex="23"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/img024.76f91a6f.png" alt="./images" loading="lazy"></figure>
+<h4 id="ognl语法">OGNL语法</h4>
+<h5 id="起点">起点</h5>
+<p>在Thymeleaf环境下，${}中的表达式可以从下列元素开始：</p>
+<ul>
+<li>访问属性域的起点
+<ul>
+<li>请求域属性名</li>
+<li>session</li>
+<li>application</li>
+</ul>
+</li>
+<li>param</li>
+<li>内置对象
+<ul>
+<li>#request</li>
+<li>#session</li>
+<li>#lists</li>
+<li>#strings</li>
+</ul>
+</li>
+</ul>
+<h5 id="属性访问语法">属性访问语法</h5>
+<ul>
+<li>访问对象属性：使用getXxx()、setXxx()方法定义的属性
+<ul>
+<li>对象.属性名</li>
+</ul>
+</li>
+<li>访问List集合或数组
+<ul>
+<li>集合或数组[下标]</li>
+</ul>
+</li>
+<li>访问Map集合
+<ul>
+<li>Map集合.key</li>
+<li>Map集合['key']</li>
+</ul>
+</li>
+</ul>
+<h3 id="分支与迭代">分支与迭代</h3>
+<h4 id="分支">分支</h4>
+<h5 id="if和unless">if和unless</h5>
+<p>让标记了th:if,th:unless的标签根据条件决定是否显式.</p>
+<p>示例的实体类:</p>
+<pre><code class="language-java">public class Employee {
+
+    private Integer empId;
+    private String empName;
+    private Double empSalary;
+</code></pre>
+<p>示例的Servlet代码：</p>
+<pre><code class="language-java">protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    // 1.创建ArrayList对象并填充
+    List&lt;Employee&gt; employeeList = new ArrayList&lt;&gt;();
+
+    employeeList.add(new Employee(1, &quot;tom&quot;, 500.00));
+    employeeList.add(new Employee(2, &quot;jerry&quot;, 600.00));
+    employeeList.add(new Employee(3, &quot;harry&quot;, 700.00));
+
+    // 2.将集合数据存入请求域
+    request.setAttribute(&quot;employeeList&quot;, employeeList);
+
+    // 3.调用父类方法渲染视图
+    super.processTemplate(&quot;list&quot;, request, response);
+}
+</code></pre>
+<p>示例的HTML代码:</p>
+<pre><code class="language-html">&lt;table&gt;
+    &lt;tr&gt;
+        &lt;th&gt;员工编号&lt;/th&gt;
+        &lt;th&gt;员工姓名&lt;/th&gt;
+        &lt;th&gt;员工工资&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr th:if=&quot;${#lists.isEmpty(employeeList)}&quot;&gt;
+        &lt;td colspan=&quot;3&quot;&gt;抱歉！没有查询到你搜索的数据！&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr th:if=&quot;${not #lists.isEmpty(employeeList)}&quot;&gt;
+        &lt;td colspan=&quot;3&quot;&gt;有数据！&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr th:unless=&quot;${#lists.isEmpty(employeeList)}&quot;&gt;
+        &lt;td colspan=&quot;3&quot;&gt;有数据！&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+<p>if配合not关键词和unless配合原表达式效果是一样的，看自己的喜好。</p>
+<h5 id="switch">switch</h5>
+<pre><code class="language-html">&lt;h3&gt;测试switch&lt;/h3&gt;
+&lt;div th:switch=&quot;${user.memberLevel}&quot;&gt;
+    &lt;p th:case=&quot;level-1&quot;&gt;银牌会员&lt;/p&gt;
+    &lt;p th:case=&quot;level-2&quot;&gt;金牌会员&lt;/p&gt;
+    &lt;p th:case=&quot;level-3&quot;&gt;白金会员&lt;/p&gt;
+    &lt;p th:case=&quot;level-4&quot;&gt;钻石会员&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<h4 id="迭代">迭代</h4>
+<pre><code class="language-html">&lt;h3&gt;测试each&lt;/h3&gt;
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;员工编号&lt;/th&gt;
+            &lt;th&gt;员工姓名&lt;/th&gt;
+            &lt;th&gt;员工工资&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody th:if=&quot;${#lists.isEmpty(employeeList)}&quot;&gt;
+        &lt;tr&gt;
+            &lt;td colspan=&quot;3&quot;&gt;抱歉！没有查询到你搜索的数据！&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody th:if=&quot;${not #lists.isEmpty(employeeList)}&quot;&gt;
+        &lt;!-- 遍历出来的每一个元素的名字 : ${要遍历的集合} --&gt;
+        &lt;tr th:each=&quot;employee : ${employeeList}&quot;&gt;
+            &lt;td th:text=&quot;${employee.empId}&quot;&gt;empId&lt;/td&gt;
+            &lt;td th:text=&quot;${employee.empName}&quot;&gt;empName&lt;/td&gt;
+            &lt;td th:text=&quot;${employee.empSalary}&quot;&gt;empSalary&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre>
+<p>在迭代过程中，可以参考下面的说明使用迭代状态：</p>
+<figure data-type="image" tabindex="24"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/img025.5df9a673.png" alt="./images" loading="lazy"></figure>
+<pre><code class="language-html">&lt;h3&gt;测试each&lt;/h3&gt;
+&lt;table&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;员工编号&lt;/th&gt;
+            &lt;th&gt;员工姓名&lt;/th&gt;
+            &lt;th&gt;员工工资&lt;/th&gt;
+            &lt;th&gt;迭代状态&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody th:if=&quot;${#lists.isEmpty(employeeList)}&quot;&gt;
+        &lt;tr&gt;
+            &lt;td colspan=&quot;3&quot;&gt;抱歉！没有查询到你搜索的数据！&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tbody th:if=&quot;${not #lists.isEmpty(employeeList)}&quot;&gt;
+        &lt;!-- 遍历出来的每一个元素的名字 : ${要遍历的集合} --&gt;
+        &lt;tr th:each=&quot;employee,empStatus : ${employeeList}&quot;&gt;
+            &lt;td th:text=&quot;${employee.empId}&quot;&gt;empId&lt;/td&gt;
+            &lt;td th:text=&quot;${employee.empName}&quot;&gt;empName&lt;/td&gt;
+            &lt;td th:text=&quot;${employee.empSalary}&quot;&gt;empSalary&lt;/td&gt;
+            &lt;td th:text=&quot;${empStatus.count}&quot;&gt;count&lt;/td&gt;
+        &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+</code></pre>
+<h3 id="包其他模板文件">包其他模板文件</h3>
+<h4 id="应用场景">应用场景</h4>
+<p>抽取各个页面的公共部分</p>
+<figure data-type="image" tabindex="25"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/downlo1ad.png" alt="downlo1ad" loading="lazy"></figure>
+<h4 id="创建页面的代码片段">创建页面的代码片段</h4>
+<p>使用th:fragment来给这个片段命名：</p>
+<pre><code class="language-html">&lt;div th:fragment=&quot;header&quot;&gt;
+    &lt;p&gt;被抽取出来的头部内容&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+<h4 id="包含到有需要的页面">包含到有需要的页面</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">语法</th>
+<th style="text-align:center">效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">th:insert</td>
+<td style="text-align:center">把目标的代码片段整个插入到当前标签内部</td>
+</tr>
+<tr>
+<td style="text-align:center">th:replace</td>
+<td style="text-align:center">用目标的代码替换当前标签</td>
+</tr>
+<tr>
+<td style="text-align:center">th:include</td>
+<td style="text-align:center">把目标的代码片段去除最外层标签，然后再插入到当前标签内部</td>
+</tr>
+</tbody>
+</table>
+<p>页面代码举例:</p>
+<pre><code class="language-html">&lt;!-- 代码片段所在页面的逻辑视图 :: 代码片段的名称 --&gt;
+&lt;div id=&quot;badBoy&quot; th:insert=&quot;segment :: header&quot;&gt;
+    div标签的原始内容
+&lt;/div&gt;
+
+&lt;div id=&quot;worseBoy&quot; th:replace=&quot;segment :: header&quot;&gt;
+    div标签的原始内容
+&lt;/div&gt;
+
+&lt;div id=&quot;worstBoy&quot; th:include=&quot;segment :: header&quot;&gt;
+    div标签的原始内容
+&lt;/div&gt;
+</code></pre>
+<p><a href="http://heavy_code_industry.gitee.io/code_heavy_industry/pro001-javaweb/lecture/chapter08/verse12.html">代码重工</a></p>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/20221109_235735.jpg');"></div>
+                 <a href="https://nanteng.github.io/post/mybatis/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2022-11-11">2022-11-11</time>
+                  <h4 class="title white no-margin">MyBatis</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://nanteng.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/tumblr_4367c0920e509941859ff81f3285b894_bd1cb190_2048.jpg');"></div>
+                 <a href="https://nanteng.github.io/post/spring5-kuang-jia/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2022-11-07">2022-11-07</time>
+                  <h4 class="title white no-margin">Spring5框架</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://nanteng.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                <div class="clear"></div>
+<script>
+jQuery(document).ready(function($){
+    $('.vemoji-btn').text('😀');
+    $("#comments").on('click', 'span.vat',function(){
+        $(this).parent('div.vmeta').next("div.vcontent").after($("div.vwrap"));
+        $('textarea#veditor').focus();
+    })
+    if(window.location.hash){
+        var checkExist = setInterval(function() {
+            if ($(window.location.hash).length) {
+                $('html, body').animate({scrollTop: $(window.location.hash).offset().top-200}, 600);
+                clearInterval(checkExist);
+            }
+        }, 100);
+    }
+})
+</script>
+
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://nanteng.github.io/post/mavenbasics/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/tumblr_b38009612775acb3f606c15e4ca4cfb0_9b8bb164_1280.png');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2022-11-16">2022-11-16</time>
+                      <h4 class="title usmall">
+                        <a href="https://nanteng.github.io/post/mavenbasics/">MavenBasics</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://nanteng.github.io/post/ssm-zheng-he/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/お豆腐_99167071.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2022-11-15">2022-11-15</time>
+                      <h4 class="title usmall">
+                        <a href="https://nanteng.github.io/post/ssm-zheng-he/">SSM整合</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://nanteng.github.io/post/springmvc/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/20221112_004658.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2022-11-15">2022-11-15</time>
+                      <h4 class="title usmall">
+                        <a href="https://nanteng.github.io/post/springmvc/">SpringMVC</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://nanteng.github.io/tag/TtKdK6ur-/" class="ctag ctag-0 ctag-TtKdK6ur-" aria-label="">Java</a>
+                    
+                      <a href="https://nanteng.github.io/tag/Pb31zuZQs/" class="ctag ctag-1 ctag-Pb31zuZQs" aria-label="">诗歌</a>
+                    
+                      <a href="https://nanteng.github.io/tag/wFMTkH_sNe/" class="ctag ctag-2 ctag-wFMTkH_sNe" aria-label="">日记</a>
+                    
+                      <a href="https://nanteng.github.io/tag/q1drPjJv3/" class="ctag ctag-3 ctag-q1drPjJv3" aria-label="">随笔</a>
+                    
+                      <a href="https://nanteng.github.io/tag/eSKuLZlYEN/" class="ctag ctag-4 ctag-eSKuLZlYEN" aria-label="">Linux</a>
+                    
+                      <a href="https://nanteng.github.io/tag/i9Zqgezw0Q/" class="ctag ctag-5 ctag-i9Zqgezw0Q" aria-label="">体验</a>
+                    
+                      <a href="https://nanteng.github.io/tag/VxnVWpClHS/" class="ctag ctag-6 ctag-VxnVWpClHS" aria-label="">软件</a>
+                    
+                      <a href="https://nanteng.github.io/tag/1DZ-nCoLTA/" class="ctag ctag-7 ctag-1DZ-nCoLTA" aria-label="">信件</a>
+                    
+                      <a href="https://nanteng.github.io/tag/Fcf3eo9iSf/" class="ctag ctag-8 ctag-Fcf3eo9iSf" aria-label="">CentOS</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://nanteng.github.io/images/avatar.png);"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">南藤北玄参</a></h4>
+                    <p class="founder">唯沉默为最高的轻蔑</p>
+                    <div class="social">
+                      
+                          
+                            <a href="https://github.com/NanTeng" class="translate-effect" target="_blank"><i class="fa fa-github"></i></a>
+                        
+                      
+                          
+                            <a href="https://twitter.com/NanTeng418" class="translate-effect" target="_blank"><i class="fa fa-twitter"></i></a>
+                        
+                      
+                        
+                      
+                          
+                            <a href="https://t.me/NanTeng" class="translate-effect" target="_blank"><i class="fa fa-telegram"></i></a>
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="logo">
+          <a href="https://nanteng.github.io"><img src="\media\images\custom-footerLogo.gif" alt=""></a>
+        </div>
+        <p class="published border-effect">
+          ©2019 共 28 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    
+    <div class="clear"></div>
+
+        
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/valine/1.3.10/Valine.Pure.min.js"></script>
+<script>
+    new Valine({
+        el: '#comments',
+        appId: 'JCYzcWAfC7BkMZHJ3hrKx85t-gzGzoHsz' ,
+        appKey: 'r89Wpg7b2oYFtiu1JGnthBzN',
+        pageSize: 30,
+        placeholder: '既然来了，那就留个痕迹吧~',
+        visitor: true // 阅读量统计
+    })
+</script>
+    
+
+      
+    <script src="https://nanteng.github.io/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

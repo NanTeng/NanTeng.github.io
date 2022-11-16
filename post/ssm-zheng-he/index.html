@@ -1,0 +1,925 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SSM整合 | 南藤北玄参</title>
+<meta name="description" content="唯沉默为最高的轻蔑" />
+<link rel="shortcut icon" href="https://nanteng.github.io/favicon.ico">
+<link rel="stylesheet" href="https://nanteng.github.io/styles/main.css">
+
+<script src="https://nanteng.github.io/media/js/jquery.min.js"></script>
+<script src="https://nanteng.github.io/media/js/masonry.pkgd.min.js"></script>
+<script src="https://nanteng.github.io/media/js/aos.js"></script>
+<script src="https://nanteng.github.io/media/js/pace.min.js"></script>
+<script src="https://nanteng.github.io/media/js/view-image.min.js"></script>
+<script src="https://nanteng.github.io/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://nanteng.github.io/media/js/functions.js"></script>
+    <meta name="referrer" content="never">
+    <meta name="description" content="ContextLoaderListener
+Spring提供了监听器ContextLoaderListener，实现ServletContextListener接口，可监听 ServletContext的状态，在web服务器的启动，读取Sp..." />
+    <meta name="keywords" content="Java" />
+    <script src="https://nanteng.github.io/media/js/waterfall.min.js"></script>
+    <script src="https://nanteng.github.io/media/js/prism.min.js"></script>
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://nanteng.github.io"><img src="\media\images\custom-headerLogo.gif" alt=""></a>
+            </div>
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                <li class=""><a href="https://nanteng.github.io" class="menu">首页</a></li>
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="https://cloud.dearkai.cn" class="menu">
+                      云盘
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/about" class="menu">
+                      关于
+                    </a>
+                  </li>
+                
+                <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox" class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+              </ul>
+            </nav>
+            <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i class="fa fa-search-line"></i></a>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+      <div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+        <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+          <div class="search-wrapper section">
+            <form id="gridea-search-form" data-update="1668567925322" action="/search/index.html" class="search-form" _lpchecked="1">
+              <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..." required="">
+              <button type="submit" class="submit" aria-label="Submit">
+                <i class="fa fa-search-line"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/お豆腐_99167071.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2022-11-15"><i class="fa fa-calendar"></i><span class="lately">12 小时前</span></time>
+              
+              <a href="https://nanteng.github.io/post/ssm-zheng-he/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/ssm-zheng-he/"> </span>
+              </a>
+              <span id="/ssm-zheng-he/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://nanteng.github.io/tag/TtKdK6ur-/" class="ctag ctag-0 ctag-TtKdK6ur-" aria-label="">Java</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">SSM整合</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h2 id="contextloaderlistener">ContextLoaderListener</h2>
+<p>Spring提供了监听器ContextLoaderListener，实现ServletContextListener接口，可监听 ServletContext的状态，在web服务器的启动，读取Spring的配置文件，创建Spring的IOC容器。web 应用中必须在web.xml中配置</p>
+<pre><code class="language-xml">&lt;listener&gt;
+    &lt;!--
+        配置Spring的监听器，在服务器启动时加载Spring的配置文件
+        Spring配置文件默认位置和名称：/WEB-INF/applicationContext.xml
+        可通过上下文参数自定义Spring配置文件的位置和名称
+    --&gt;
+&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+    
+&lt;/listener&gt;
+
+&lt;!--自定义Spring配置文件的位置和名称--&gt;
+&lt;context-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;classpath:spring.xml&lt;/param-value&gt;
+&lt;/context-param&gt;
+</code></pre>
+<h2 id="准备工作">准备工作</h2>
+<h3 id="创建maven-module">创建Maven Module</h3>
+<h3 id="导入依赖">导入依赖</h3>
+<pre><code class="language-xml">&lt;packaging&gt;war&lt;/packaging&gt;
+
+&lt;properties&gt;
+&lt;spring.version&gt;5.3.1&lt;/spring.version&gt;
+&lt;/properties&gt;
+
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-beans&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!--springmvc--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+	&lt;/dependency&gt;
+    
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+        &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+        &lt;version&gt;${spring.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- Mybatis核心 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+        &lt;version&gt;3.5.7&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!--mybatis和spring的整合包--&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+        &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+        &lt;version&gt;2.0.6&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- 连接池 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+        &lt;artifactId&gt;druid&lt;/artifactId&gt;
+        &lt;version&gt;1.0.9&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- junit测试 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;junit&lt;/groupId&gt;
+        &lt;artifactId&gt;junit&lt;/artifactId&gt;
+        &lt;version&gt;4.12&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- MySQL驱动 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;mysql&lt;/groupId&gt;
+        &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;
+        &lt;version&gt;8.0.16&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- log4j日志 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;log4j&lt;/groupId&gt;
+        &lt;artifactId&gt;log4j&lt;/artifactId&gt;
+        &lt;version&gt;1.2.17&lt;/version&gt;
+    &lt;/dependency&gt;
+	&lt;!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper --&gt;
+    
+	&lt;dependency&gt;
+        &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;
+        &lt;artifactId&gt;pagehelper&lt;/artifactId&gt;
+        &lt;version&gt;5.2.0&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- 日志 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+        &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+        &lt;version&gt;1.2.3&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- ServletAPI --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+        &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+        &lt;version&gt;3.1.0&lt;/version&gt;
+        &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+    
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;
+        &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+        &lt;version&gt;2.12.1&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;dependency&gt;
+        &lt;groupId&gt;commons-fileupload&lt;/groupId&gt;
+        &lt;artifactId&gt;commons-fileupload&lt;/artifactId&gt;
+        &lt;version&gt;1.3.1&lt;/version&gt;
+    &lt;/dependency&gt;
+    
+    &lt;!-- Spring5和Thymeleaf整合包 --&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.thymeleaf&lt;/groupId&gt;
+        &lt;artifactId&gt;thymeleaf-spring5&lt;/artifactId&gt;
+        &lt;version&gt;3.0.12.RELEASE&lt;/version&gt;
+    &lt;/dependency&gt;
+   &lt;/dependencies&gt;
+</code></pre>
+<h3 id="创建表">创建表</h3>
+<pre><code class="language-mysql">CREATE TABLE `t_emp` (
+`emp_id` int(11) NOT NULL AUTO_INCREMENT,
+`emp_name` varchar(20) DEFAULT NULL,
+`age` int(11) DEFAULT NULL,
+`sex` char(1) DEFAULT NULL,
+`email` varchar(50) DEFAULT NULL,
+PRIMARY KEY (`emp_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+</code></pre>
+<h3 id="配置webxml">配置web.xml</h3>
+<pre><code class="language-xml">&lt;!-- 配置Spring的编码过滤器 --&gt;
+&lt;filter&gt;
+	&lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;
+	&lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+&lt;init-param&gt;
+    &lt;param-name&gt;encoding&lt;/param-name&gt;
+    &lt;param-value&gt;UTF-8&lt;/param-value&gt;
+&lt;/init-param&gt;
+&lt;init-param&gt;
+    &lt;param-name&gt;forceEncoding&lt;/param-name&gt;
+    &lt;param-value&gt;true&lt;/param-value&gt;
+&lt;/init-param&gt;
+&lt;/filter&gt;
+
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;CharacterEncodingFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+
+&lt;!-- 配置处理请求方式PUT和DELETE的过滤器 --&gt;
+&lt;filter&gt;
+	&lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;
+&lt;filter-class&gt;org.springframework.web.filter.HiddenHttpMethodFilter&lt;/filterclass&gt;
+&lt;/filter&gt;
+
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;HiddenHttpMethodFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+
+&lt;!-- 配置SpringMVC的前端控制器 --&gt;
+&lt;servlet&gt;
+    &lt;servlet-name&gt;DispatcherServlet&lt;/servlet-name&gt;
+&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+    
+&lt;!-- 设置SpringMVC的配置文件的位置和名称 --&gt;
+&lt;init-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;classpath:SpringMVC.xml&lt;/param-value&gt;
+&lt;/init-param&gt;
+	&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;
+&lt;/servlet&gt;
+
+&lt;servlet-mapping&gt;
+	&lt;servlet-name&gt;DispatcherServlet&lt;/servlet-name&gt;
+	&lt;url-pattern&gt;/&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+
+&lt;!-- 设置Spring的配置文件的位置和名称 --&gt;
+&lt;context-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+    &lt;param-value&gt;classpath:Spring.xml&lt;/param-value&gt;
+&lt;/context-param&gt;
+
+&lt;!-- 配置Spring的监听器 --&gt;
+&lt;listener&gt;
+	&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;/listener-class&gt;
+&lt;/listener&gt;
+
+</code></pre>
+<h3 id="创建springmvc的配置文件并配置">创建SpringMVC的配置文件并配置</h3>
+<pre><code class="language-xml">&lt;!--扫描组件--&gt;
+&lt;context:component-scan base-package=&quot;com.atguigu.ssm.controller&quot;&gt;&lt;/context:component-scan&gt;
+
+&lt;!--配置视图解析器--&gt;
+&lt;bean id=&quot;viewResolver&quot;
+class=&quot;org.thymeleaf.spring5.view.ThymeleafViewResolver&quot;&gt;
+    &lt;property name=&quot;order&quot; value=&quot;1&quot;/&gt;
+    &lt;property name=&quot;characterEncoding&quot; value=&quot;UTF-8&quot;/&gt;
+    &lt;property name=&quot;templateEngine&quot;&gt;
+		&lt;bean class=&quot;org.thymeleaf.spring5.SpringTemplateEngine&quot;&gt;
+			&lt;property name=&quot;templateResolver&quot;&gt;
+				&lt;bean	class=&quot;org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver&quot;&gt;
+				&lt;!-- 视图前缀 --&gt;
+				&lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/templates/&quot;/&gt;
+				&lt;!-- 视图后缀 --&gt;
+				&lt;property name=&quot;suffix&quot; value=&quot;.html&quot;/&gt;
+            	&lt;property name=&quot;templateMode&quot; value=&quot;HTML5&quot;/&gt;
+            	&lt;property name=&quot;characterEncoding&quot; value=&quot;UTF-8&quot; /&gt;
+            &lt;/bean&gt;
+		&lt;/property&gt;
+	&lt;/bean&gt;
+	&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;!-- 配置访问首页的视图控制 --&gt;
+&lt;mvc:view-controller path=&quot;/&quot; view-name=&quot;index&quot;&gt;&lt;/mvc:view-controller&gt;
+
+&lt;!-- 配置默认的servlet处理静态资源 --&gt;
+&lt;mvc:default-servlet-handler /&gt;
+
+&lt;!-- 开启MVC的注解驱动 --&gt;
+&lt;mvc:annotation-driven /&gt;
+
+</code></pre>
+<h3 id="搭建mybatis环境">搭建MyBatis环境</h3>
+<h4 id="创建属性文件jdbcproperties">创建属性文件jdbc.properties</h4>
+<pre><code class="language-properties">jdbc.user=root
+jdbc.password=atguigu
+jdbc.url=jdbc:mysql://localhost:3306/ssm?serverTimezone=UTC
+jdbc.driver=com.mysql.cj.jdbc.Driver
+</code></pre>
+<h4 id="创建mybatis的核心配置文件mybatis-configxml">创建MyBatis的核心配置文件mybatis-config.xml</h4>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE configuration
+    PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
+    &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
+&lt;configuration&gt;
+    
+	&lt;settings&gt;
+		&lt;!--将下划线映射为驼峰--&gt;
+		&lt;setting name=&quot;mapUnderscoreToCamelCase&quot; value=&quot;true&quot;/&gt;
+    &lt;/settings&gt;
+    
+    &lt;plugins&gt;
+	&lt;!--配置分页插件--&gt;
+	&lt;plugin interceptor=&quot;com.github.pagehelper.PageInterceptor&quot;&gt;&lt;/plugin&gt;
+&lt;/plugins&gt;
+&lt;/configuration&gt;
+</code></pre>
+<h4 id="创建mapper接口和映射文件">创建Mapper接口和映射文件</h4>
+<pre><code class="language-java">public interface EmployeeMapper {
+	List&lt;Employee&gt; getEmployeeList();
+}
+</code></pre>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper
+    PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
+    &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+&lt;mapper namespace=&quot;com.atguigu.ssm.mapper.EmployeeMapper&quot;&gt;
+    
+	&lt;select id=&quot;getEmployeeList&quot; resultType=&quot;Employee&quot;&gt;
+		select * from t_emp
+	&lt;/select&gt;
+    
+&lt;/mapper&gt;
+</code></pre>
+<h4 id="创建日志文件log4jxml">创建日志文件log4j.xml</h4>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE log4j:configuration SYSTEM &quot;log4j.dtd&quot;&gt;
+
+&lt;log4j:configuration xmlns:log4j=&quot;http://jakarta.apache.org/log4j/&quot;&gt;
+	&lt;appender name=&quot;STDOUT&quot; class=&quot;org.apache.log4j.ConsoleAppender&quot;&gt;
+		&lt;param name=&quot;Encoding&quot; value=&quot;UTF-8&quot; /&gt;
+		&lt;layout class=&quot;org.apache.log4j.PatternLayout&quot;&gt;
+			&lt;param name=&quot;ConversionPattern&quot; value=&quot;%-5p %d{MM-dd HH:mm:ss,SSS}%m (%F:%L) \n&quot; /&gt;
+		&lt;/layout&gt;
+	&lt;/appender&gt;
+	&lt;logger name=&quot;java.sql&quot;&gt;
+		&lt;level value=&quot;debug&quot; /&gt;
+	&lt;/logger&gt;
+	&lt;logger name=&quot;org.apache.ibatis&quot;&gt;
+		&lt;level value=&quot;info&quot; /&gt;
+	&lt;/logger&gt;
+	&lt;root&gt;
+		&lt;level value=&quot;debug&quot; /&gt;
+		&lt;appender-ref ref=&quot;STDOUT&quot; /&gt;
+	&lt;/root&gt;
+&lt;/log4j:configuration&gt;
+</code></pre>
+<h4 id="创建spring的配置文件并配置">创建Spring的配置文件并配置</h4>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+        xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+        xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+        xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+https://www.springframework.org/schema/context/spring-context.xsd&quot;&gt;
+    &lt;!--扫描组件--&gt;
+    &lt;context:component-scan base-package=&quot;com.atguigu.ssm&quot;&gt;
+    	&lt;context:exclude-filter type=&quot;annotation&quot; expression=&quot;org.springframework.stereotype.Controller&quot;/&gt;
+	&lt;/context:component-scan&gt;
+    
+&lt;!-- 引入jdbc.properties --&gt;
+	&lt;context:property-placeholder location=&quot;classpath:jdbc.properties&quot;&gt;
+&lt;/context:property-placeholder&gt;
+    
+&lt;!-- 配置Druid数据源 --&gt;
+&lt;bean id=&quot;dataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot;&gt;
+    &lt;property name=&quot;driverClassName&quot; value=&quot;${jdbc.driver}&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;url&quot; value=&quot;${jdbc.url}&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;username&quot; value=&quot;${jdbc.username}&quot;&gt;&lt;/property&gt;
+    &lt;property name=&quot;password&quot; value=&quot;${jdbc.password}&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;	
+    
+	&lt;!-- 配置用于创建SqlSessionFactory的工厂bean --&gt;
+	&lt;bean class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+		&lt;!-- 设置MyBatis配置文件的路径（可以不设置） --&gt;
+		&lt;property name=&quot;configLocation&quot; value=&quot;classpath:mybatis-config.xml&quot;&gt;
+&lt;/property&gt;
+	&lt;!-- 设置数据源 --&gt;
+	&lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+	&lt;!-- 设置类型别名所对应的包 --&gt;
+	&lt;property name=&quot;typeAliasesPackage&quot; value=&quot;com.atguigu.ssm.pojo&quot;&gt;
+&lt;/property&gt;
+        
+    &lt;!--
+        设置映射文件的路径
+        若映射文件所在路径和mapper接口所在路径一致，则不需要设置
+    --&gt;
+    &lt;!--
+        &lt;property name=&quot;mapperLocations&quot; value=&quot;classpath:mapper/*.xml&quot;&gt;
+        &lt;/property&gt;
+    --&gt;
+	&lt;/bean&gt;
+&lt;!--
+配置mapper接口的扫描配置
+由mybatis-spring提供，可以将指定包下所有的mapper接口创建动态代理
+并将这些动态代理作为IOC容器的bean管理
+--&gt;
+&lt;bean class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+	&lt;property name=&quot;basePackage&quot; value=&quot;com.atguigu.ssm.mapper&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+    
+&lt;/beans&gt;
+</code></pre>
+<h4 id="测试功能">测试功能</h4>
+<h5 id="创建组件">创建组件</h5>
+<p>实体类Employee</p>
+<pre><code class="language-java">    public class Employee {
+        private Integer empId;
+        private String empName;
+        private Integer age;
+        private String sex;
+        private String email;
+        public Employee() {
+        }
+        public Employee(Integer empId, String empName, Integer age, String sex,
+                        String email) {
+            this.empId = empId;
+            this.empName = empName;
+            this.age = age;
+            this.sex = sex;
+            this.email = email;
+        }
+        public Integer getEmpId() {
+            return empId;
+        }
+        public void setEmpId(Integer empId) {
+            this.empId = empId;
+        }
+        public String getEmpName() {
+            return empName;
+        }
+        public void setEmpName(String empName) {
+            this.empName = empName;
+        }
+        public Integer getAge() {
+            return age;
+        }
+        public void setAge(Integer age) {
+            this.age = age;
+        }
+        public String getSex() {
+            return sex;
+        }
+        public void setSex(String sex) {
+            this.sex = sex;
+        }
+        public String getEmail() {
+            return email;
+        }
+        public void setEmail(String email) {
+            this.email = email;
+        }
+    }
+</code></pre>
+<p>创建控制层组件EmployeeController</p>
+<pre><code class="language-java">    @Controller
+    public class EmployeeController {
+        @Autowired
+        private EmployeeService employeeService;
+        @RequestMapping(value = &quot;/employee/page/{pageNum}&quot;, method =
+                RequestMethod.GET)
+        public String getEmployeeList(Model model, @PathVariable(&quot;pageNum&quot;) Integer
+                pageNum){
+            PageInfo&lt;Employee&gt; page = employeeService.getEmployeeList(pageNum);
+            model.addAttribute(&quot;page&quot;, page);
+            return &quot;employee_list&quot;;
+        }
+    }
+
+</code></pre>
+<p>创建接口EmployeeService</p>
+<pre><code class="language-java">public interface EmployeeService {
+	PageInfo&lt;Employee&gt; getEmployeeList(Integer pageNum);
+}
+</code></pre>
+<p>创建实现类EmployeeServiceImpl</p>
+<pre><code class="language-java">    @Service
+    public class EmployeeServiceImpl implements EmployeeService {
+        @Autowired
+        private EmployeeMapper employeeMapper;
+        @Override
+        public PageInfo&lt;Employee&gt; getEmployeeList(Integer pageNum) {
+            PageHelper.startPage(pageNum, 4);
+            List&lt;Employee&gt; list = employeeMapper.getEmployeeList();
+            PageInfo&lt;Employee&gt; page = new PageInfo&lt;&gt;(list, 5);
+            return page;
+        }
+    }
+</code></pre>
+<h5 id="创建页面">创建页面</h5>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;Employee Info&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; th:href=&quot;@{/static/css/index_work.css}&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th colspan=&quot;6&quot;&gt;Employee Info&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;th&gt;emp_id&lt;/th&gt;
+    &lt;th&gt;emp_name&lt;/th&gt;
+    &lt;th&gt;age&lt;/th&gt;
+    &lt;th&gt;sex&lt;/th&gt;
+    &lt;th&gt;email&lt;/th&gt;
+    &lt;th&gt;options&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr th:each=&quot;employee : ${page.list}&quot;&gt;
+    &lt;td th:text=&quot;${employee.empId}&quot;&gt;&lt;/td&gt;
+    &lt;td th:text=&quot;${employee.empName}&quot;&gt;&lt;/td&gt;
+    &lt;td th:text=&quot;${employee.age}&quot;&gt;&lt;/td&gt;
+    &lt;td th:text=&quot;${employee.sex}&quot;&gt;&lt;/td&gt;
+    &lt;td th:text=&quot;${employee.email}&quot;&gt;&lt;/td&gt;
+    &lt;td&gt;
+      &lt;a href=&quot;&quot;&gt;delete&lt;/a&gt;
+      &lt;a href=&quot;&quot;&gt;update&lt;/a&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td colspan=&quot;6&quot;&gt;
+&lt;span th:if=&quot;${page.hasPreviousPage}&quot;&gt;
+&lt;a th:href=&quot;@{/employee/page/1}&quot;&gt;首页&lt;/a&gt;
+&lt;a th:href=&quot;@{'/employee/page/'+${page.prePage}}&quot;&gt;上一页&lt;/a&gt;
+&lt;/span&gt;
+      &lt;span th:each=&quot;num : ${page.navigatepageNums}&quot;&gt;
+&lt;a th:if=&quot;${page.pageNum==num}&quot;
+   th:href=&quot;@{'/employee/page/'+${num}}&quot; th:text=&quot;'['+${num}+']'&quot; style=&quot;color:
+red;&quot;&gt;&lt;/a&gt;
+&lt;a th:if=&quot;${page.pageNum!=num}&quot;
+   th:href=&quot;@{'/employee/page/'+${num}}&quot; th:text=&quot;${num} &quot;&gt;&lt;/a&gt;
+&lt;/span&gt;
+      &lt;span th:if=&quot;${page.hasNextPage}&quot;&gt;
+&lt;a th:href=&quot;@{'/employee/page/'+${page.nextPage}}&quot;&gt;下一页&lt;/a&gt;
+&lt;a th:href=&quot;@{'/employee/page/'+${page.pages}}&quot;&gt;末页&lt;/a&gt;
+&lt;/span&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h5 id="访问测试分页功能">访问测试分页功能</h5>
+<p>localhost:8080/employee/page/1</p>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/tumblr_b38009612775acb3f606c15e4ca4cfb0_9b8bb164_1280.png');"></div>
+                 <a href="https://nanteng.github.io/post/mavenbasics/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2022-11-16">2022-11-16</time>
+                  <h4 class="title white no-margin">MavenBasics</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://nanteng.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/20221112_004658.jpg');"></div>
+                 <a href="https://nanteng.github.io/post/springmvc/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2022-11-15">2022-11-15</time>
+                  <h4 class="title white no-margin">SpringMVC</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://nanteng.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                <div class="clear"></div>
+<script>
+jQuery(document).ready(function($){
+    $('.vemoji-btn').text('😀');
+    $("#comments").on('click', 'span.vat',function(){
+        $(this).parent('div.vmeta').next("div.vcontent").after($("div.vwrap"));
+        $('textarea#veditor').focus();
+    })
+    if(window.location.hash){
+        var checkExist = setInterval(function() {
+            if ($(window.location.hash).length) {
+                $('html, body').animate({scrollTop: $(window.location.hash).offset().top-200}, 600);
+                clearInterval(checkExist);
+            }
+        }, 100);
+    }
+})
+</script>
+
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://nanteng.github.io/post/mavenbasics/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/tumblr_b38009612775acb3f606c15e4ca4cfb0_9b8bb164_1280.png');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2022-11-16">2022-11-16</time>
+                      <h4 class="title usmall">
+                        <a href="https://nanteng.github.io/post/mavenbasics/">MavenBasics</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://nanteng.github.io/post/ssm-zheng-he/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/お豆腐_99167071.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2022-11-15">2022-11-15</time>
+                      <h4 class="title usmall">
+                        <a href="https://nanteng.github.io/post/ssm-zheng-he/">SSM整合</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://nanteng.github.io/post/springmvc/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/20221112_004658.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2022-11-15">2022-11-15</time>
+                      <h4 class="title usmall">
+                        <a href="https://nanteng.github.io/post/springmvc/">SpringMVC</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://nanteng.github.io/tag/TtKdK6ur-/" class="ctag ctag-0 ctag-TtKdK6ur-" aria-label="">Java</a>
+                    
+                      <a href="https://nanteng.github.io/tag/Pb31zuZQs/" class="ctag ctag-1 ctag-Pb31zuZQs" aria-label="">诗歌</a>
+                    
+                      <a href="https://nanteng.github.io/tag/wFMTkH_sNe/" class="ctag ctag-2 ctag-wFMTkH_sNe" aria-label="">日记</a>
+                    
+                      <a href="https://nanteng.github.io/tag/q1drPjJv3/" class="ctag ctag-3 ctag-q1drPjJv3" aria-label="">随笔</a>
+                    
+                      <a href="https://nanteng.github.io/tag/eSKuLZlYEN/" class="ctag ctag-4 ctag-eSKuLZlYEN" aria-label="">Linux</a>
+                    
+                      <a href="https://nanteng.github.io/tag/i9Zqgezw0Q/" class="ctag ctag-5 ctag-i9Zqgezw0Q" aria-label="">体验</a>
+                    
+                      <a href="https://nanteng.github.io/tag/VxnVWpClHS/" class="ctag ctag-6 ctag-VxnVWpClHS" aria-label="">软件</a>
+                    
+                      <a href="https://nanteng.github.io/tag/1DZ-nCoLTA/" class="ctag ctag-7 ctag-1DZ-nCoLTA" aria-label="">信件</a>
+                    
+                      <a href="https://nanteng.github.io/tag/Fcf3eo9iSf/" class="ctag ctag-8 ctag-Fcf3eo9iSf" aria-label="">CentOS</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://nanteng.github.io/images/avatar.png);"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">南藤北玄参</a></h4>
+                    <p class="founder">唯沉默为最高的轻蔑</p>
+                    <div class="social">
+                      
+                          
+                            <a href="https://github.com/NanTeng" class="translate-effect" target="_blank"><i class="fa fa-github"></i></a>
+                        
+                      
+                          
+                            <a href="https://twitter.com/NanTeng418" class="translate-effect" target="_blank"><i class="fa fa-twitter"></i></a>
+                        
+                      
+                        
+                      
+                          
+                            <a href="https://t.me/NanTeng" class="translate-effect" target="_blank"><i class="fa fa-telegram"></i></a>
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="logo">
+          <a href="https://nanteng.github.io"><img src="\media\images\custom-footerLogo.gif" alt=""></a>
+        </div>
+        <p class="published border-effect">
+          ©2019 共 28 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    
+    <div class="clear"></div>
+
+        
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/valine/1.3.10/Valine.Pure.min.js"></script>
+<script>
+    new Valine({
+        el: '#comments',
+        appId: 'JCYzcWAfC7BkMZHJ3hrKx85t-gzGzoHsz' ,
+        appKey: 'r89Wpg7b2oYFtiu1JGnthBzN',
+        pageSize: 30,
+        placeholder: '既然来了，那就留个痕迹吧~',
+        visitor: true // 阅读量统计
+    })
+</script>
+    
+
+      
+    <script src="https://nanteng.github.io/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

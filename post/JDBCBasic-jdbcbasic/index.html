@@ -1,0 +1,2527 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>JDBCBasic | 南藤北玄参</title>
+<meta name="description" content="唯沉默为最高的轻蔑" />
+<link rel="shortcut icon" href="https://nanteng.github.io/favicon.ico">
+<link rel="stylesheet" href="https://nanteng.github.io/styles/main.css">
+
+<script src="https://nanteng.github.io/media/js/jquery.min.js"></script>
+<script src="https://nanteng.github.io/media/js/masonry.pkgd.min.js"></script>
+<script src="https://nanteng.github.io/media/js/aos.js"></script>
+<script src="https://nanteng.github.io/media/js/pace.min.js"></script>
+<script src="https://nanteng.github.io/media/js/view-image.min.js"></script>
+<script src="https://nanteng.github.io/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://nanteng.github.io/media/js/functions.js"></script>
+    <meta name="referrer" content="never">
+    <meta name="description" content="JDBC概述
+数据的持久化
+
+
+持久化(persistence)把数据库保存到可掉电式存储设备中以供之后使用。大多数情况下，特别是企业级应用， 数据持久化意味着将内存中的数据保存到硬盘上加以”固化”，而持久化的实现过程大多通过各种关系数据库..." />
+    <meta name="keywords" content="Java" />
+    <script src="https://nanteng.github.io/media/js/waterfall.min.js"></script>
+    <script src="https://nanteng.github.io/media/js/prism.min.js"></script>
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://nanteng.github.io"><img src="\media\images\custom-headerLogo.gif" alt=""></a>
+            </div>
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                <li class=""><a href="https://nanteng.github.io" class="menu">首页</a></li>
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="https://cloud.dearkai.cn" class="menu">
+                      云盘
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/about" class="menu">
+                      关于
+                    </a>
+                  </li>
+                
+                <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox" class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+              </ul>
+            </nav>
+            <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i class="fa fa-search-line"></i></a>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+      <div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+        <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+          <div class="search-wrapper section">
+            <form id="gridea-search-form" data-update="1668567925322" action="/search/index.html" class="search-form" _lpchecked="1">
+              <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..." required="">
+              <button type="submit" class="submit" aria-label="Submit">
+                <i class="fa fa-search-line"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://oss.dearkai.cn/wapper/tumblr_c5d7ab53762fdb8bee37724229775658_b9b69268_2048.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2022-10-30"><i class="fa fa-calendar"></i><span class="lately">17 天前</span></time>
+              
+              <a href="https://nanteng.github.io/post/JDBCBasic-jdbcbasic/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/JDBCBasic-jdbcbasic/"> </span>
+              </a>
+              <span id="/JDBCBasic-jdbcbasic/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://nanteng.github.io/tag/TtKdK6ur-/" class="ctag ctag-0 ctag-TtKdK6ur-" aria-label="">Java</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">JDBCBasic</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h2 id="jdbc概述">JDBC概述</h2>
+<h3 id="数据的持久化">数据的持久化</h3>
+<ul>
+<li>
+<p>持久化(persistence)把数据库保存到可掉电式存储设备中以供之后使用。大多数情况下，特别是企业级应用， 数据持久化意味着将内存中的数据保存到硬盘上加以”固化”，而持久化的实现过程大多通过各种关系数据库来完成。</p>
+</li>
+<li>
+<p>持久化的主要应用是将内存中的数据存储在关系型数据库中，当然也可以存储在磁盘文件，xml数据文件中。</p>
+<figure data-type="image" tabindex="1"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1566741430592.png" alt="1566741430592" loading="lazy"></figure>
+</li>
+</ul>
+<h3 id="java中数据存储技术">Java中数据存储技术</h3>
+<ul>
+<li>在Java中，数据库存取技术可分为如下几类：
+<ul>
+<li>JDBC直接访问数据库</li>
+<li>JDO (JavaDate Object)技术</li>
+<li>第三方O/R工具，如Hibernate,Mybatis等</li>
+</ul>
+</li>
+<li>JDBC是Java访问数据库的基石，JDO,Hibernate,MyBatis等只更好的封装了JDBC</li>
+</ul>
+<h3 id="jdbc介绍">JDBC介绍</h3>
+<ul>
+<li>
+<p>JDBC(Java Database Connectivity)是一个独立于特定数据库管理系统，通用的SQL数据库存取和操作的公共接口(一组API),定义了用来访问数据库的标准Java类库，(java.sql,javax.sql)使用这些类库可以以一种标准的方法，方便地访问数据库资源。</p>
+</li>
+<li>
+<p>DBC为访问不同的<code>数据库提供了一种统一的途径</code>，为开发者屏蔽了一些细节问题。</p>
+</li>
+<li>
+<p>JDBC的目标是使Java程序员使用JDBC可以连接任何提供了JDBC驱动程序的数据库系统，这样就使得程序员无需 对特定的数据库系统的特点有过多的了解，从而大大<code>简化和加快了开发过程</code>。</p>
+</li>
+<li>
+<p>如果没有JDBC,那么Java程序访问数据库是这样的：</p>
+<figure data-type="image" tabindex="2"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1555575760234.png" alt="1555575760234" loading="lazy"></figure>
+</li>
+<li>
+<p>有了JDBC之后，Java访问数据库时是这样的：</p>
+<figure data-type="image" tabindex="3"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1555575779249.png" alt="1555575779249" loading="lazy"></figure>
+</li>
+<li>
+<p>总结：</p>
+<figure data-type="image" tabindex="4"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1555575941569.png" alt="1555575941569" loading="lazy"></figure>
+</li>
+</ul>
+<h3 id="jdbc体系结构">JDBC体系结构</h3>
+<ul>
+<li>JDBC接口（API）包括两个层次：
+<ul>
+<li><strong>面向应用的API</strong>：Java API，抽象接口，供应用程序开发人员使用（连接数据库，执行SQL语句，获得结果）。</li>
+<li><strong>面向数据库的API</strong>：Java Driver API，供开发商开发数据库驱动程序用。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>JDBC是sun公司提供一套用于数据库操作的接口，java程序员只需要面向这套接口编程即可。</p>
+<p>不同的数据库厂商，需要针对这套接口，提供不同实现。不同的实现的集合，即为不同数据库的驱动。 ————面向接口编程</p>
+</blockquote>
+<h3 id="jdbc程序编写步骤">JDBC程序编写步骤</h3>
+<figure data-type="image" tabindex="5"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1565969323908.png" alt="1565969323908" loading="lazy"></figure>
+<blockquote>
+<p>ODBC(OPen Database Connectivity,开放式数据库连接)，是微软在Windows平台下推出的。使用者在程序中只需要调用ODBC API,由ODBC驱动程序将调用转换为对特定的数据库的调用请求。</p>
+</blockquote>
+<h2 id="获取数据库连接">获取数据库连接</h2>
+<h3 id="要素一driver接口实现类">要素一：Driver接口实现类</h3>
+<h4 id="driver接口介绍"><code>Driver</code>接口介绍</h4>
+<ul>
+<li>java.sql.Driver接口是所有JDBC驱动程序需要实现的接口。这个接口是提供给数据库厂商使用的，不同数据库厂商提供不同的实现。</li>
+<li>在程序中不需要直接去访问实现了Driver接口的类，而是由驱动程序管理类(java.sql.DriverManager)去调用这些Driver实现
+<ul>
+<li>Oracle的驱动：<code>oracle.jdbc.driver.OracleDriver</code></li>
+<li>MySql的驱动：<code>com.mysql.jdbc.Driver</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="加载与注册jdbc驱动">加载与注册JDBC驱动</h4>
+<ul>
+<li>
+<p>加载驱动：加载JDBC驱动需要调用<code>Class</code>类的静态方法<code>forName()</code>,向其传递要加载的JDBC驱动的类名</p>
+<ul>
+<li>Class.forName(&quot;com.mysql.jdbc.Driver&quot;);</li>
+</ul>
+</li>
+<li>
+<p>注册驱动：<code>DriverManager</code>类是驱动程序管理器类，负责管理驱动程序</p>
+<ul>
+<li>
+<p>使用Driver.registerDriver(&quot;com.mysql.jdbc.Driver&quot;)来注册驱动</p>
+</li>
+<li>
+<p>通常不用显式调用DriverManager类的registerDriver()方法来注册驱动程序类的实例，因为Driver接口的驱动程序类都包含了静态代码块，在这个静态代码块中，会调用Drivermanager.registerDriver()方法来注册自身的一个实例。下图是MySQL的Driver实现类的源码：</p>
+<figure data-type="image" tabindex="6"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1566136831283.png" alt="1566136831283" loading="lazy"></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="要素二url">要素二：URL</h3>
+<ul>
+<li>
+<p>JDBC URL 用于标识一个被注册的驱动程序，驱动程序管理器通过这个URL选择正确的驱动程序，从而建立到数据库的连接。</p>
+</li>
+<li>
+<p>JDBC URL的标准由三部分组成，各部分中间用冒号分隔。</p>
+<ul>
+<li>JDBC:子协议:子名称</li>
+<li>协议：JDBC URL中的协议总是jdbc</li>
+<li>子协议：子协议用于标识一个数据库驱动程序</li>
+<li>子名称：一种标识数据库的方法。子名称可以依不同的子协议而变化，用子名称的目的是为了定位数据库提供足够的信息。包括主机名（对应服务端的IP地址），端口号，数据库名</li>
+</ul>
+</li>
+<li>
+<p>例如：</p>
+<figure data-type="image" tabindex="7"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1555576477107.png" alt="1555576477107" loading="lazy"></figure>
+</li>
+<li>
+<p>几种常见的数据库的JDBC URL</p>
+<ul>
+<li>MySQL的连接URL编写方式：
+<ul>
+<li>jdbc:mysql://主机名称:mysql服务器端口号/数据库名称？参数=值&amp;参数=值</li>
+<li>jdbc:mysql://localhost:3306/test</li>
+<li>jdbc:mysql://localhost:3306/test?useUnicode=true$characterEncoding=utf8(如果JDBC程序与服务器端的字符集不一致，会导致乱码，那么可以通过参数指定服务器端的字符集)</li>
+<li>dbc:mysql://localhost:3306/test?user=root&amp;password=123456</li>
+</ul>
+</li>
+<li>Oracle 9i的连接URL编写方式
+<ul>
+<li>dbc:oracle:thin:@主机名称:oracle服务端口号:数据库名称</li>
+<li>dbc:oracle:thin:@localhost:1521:test</li>
+</ul>
+</li>
+<li>SQLServer的连接URL编写方式：
+<ul>
+<li>dbc:sqlserver://主机名称:sqlserver服务端口号:DatabaseName=数据库名称</li>
+<li>jdbc:sqlserver://localhost:1433:DatabaseName=test</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="要素四用户名和密码">要素四：用户名和密码</h3>
+<ul>
+<li><code>user</code>,<code>password</code>可以用<code>&quot;属性名=属性值&quot;</code>方式告诉数据库</li>
+<li>可以调用DriverManager类的getConnection()方法建立到数据库的连接</li>
+</ul>
+<h3 id="数据库连接方式举例">数据库连接方式举例</h3>
+<h4 id="连接方式一">连接方式一</h4>
+<pre><code class="language-java">//方式一:
+	@Test
+	public void testConnection1() throws Exception {
+		//提供java.sql.Driver接口实现类的对象
+		Driver driver = new com.mysql.jdbc.Driver();
+		
+        //提供url1,指明具体操作的数据
+		String url =&quot;jdbc:mysql://localhost:3307/test&quot;;
+		
+		//提供Properties的对象，指明用户名和密码/将用户名和密码封装在Properties中
+		
+		Properties info = new Properties();
+		info.setProperty(&quot;user&quot;, &quot;root&quot;);
+		info.setProperty(&quot;password&quot;, &quot;1234556&quot;);
+        
+        //调用dirver的connect(),获取连接
+		Connection conn = driver.connect(url, info);
+		
+		System.out.println(conn);
+	}
+</code></pre>
+<blockquote>
+<p>上述代码显式出现了第三方数据库的API</p>
+</blockquote>
+<h4 id="连接方式二">连接方式二</h4>
+<pre><code class="language-java">//方式二：
+	@Test
+	public void testConnection2() throws Exception{
+		//获取Driver实现类对象：使用反射
+		Class aClass = Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+		Driver dirver =(Driver) aClass.newInstance();
+		
+		//2.提供要连接的数据库
+		
+		String url = &quot;jdbc:mysql://localhost:3307/test&quot;;
+		
+		//3.提供要连接的用户名和密码
+		Properties info = new Properties();
+		info.setProperty(&quot;user&quot;, &quot;root&quot;);
+		info.setProperty(&quot;password&quot;, &quot;123456&quot;);
+		
+		//4.获取连接
+		Connection conn = dirver.connect(url, info);
+		System.out.println(conn);
+	}
+</code></pre>
+<blockquote>
+<p>对方式一的迭代:不出现第三方的API,使得程序具有更好的可移植性。体现了面向接口编程的思想。</p>
+</blockquote>
+<h4 id="连接方式三">连接方式三</h4>
+<pre><code class="language-java">//方式三：使用DriverManager替换Driver
+	@Test
+	public void testConnection3() throws Exception {
+		//1.获取Driver实现类对象
+		Class aClass = Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+		Driver driver = (Driver) aClass.newInstance();
+		
+		//2.提供另外三个连接的基本信息
+		String url = &quot;jdbc:mysql://localhost:3307/test&quot;;
+		String user = &quot;root&quot;;
+		String password = &quot;123456&quot;;
+		
+		//注册驱动registerDriver
+		DriverManager.registerDriver(driver);
+		
+		//获取连接
+		Connection conn = DriverManager.getConnection(url,user,password);
+		System.out.println(conn);
+	}
+</code></pre>
+<blockquote>
+<p>使用DriverManager实现数据库的连接。体会获取连接必要的4个基本要素。</p>
+</blockquote>
+<h4 id="连接方式四">连接方式四</h4>
+<pre><code class="language-java">//方式四：可以只是加载驱动，不用显式的注册驱动了
+	@Test
+	public void testConnection4() throws Exception {
+		//1.提供另外三个连接的基本信息
+		String url = &quot;jdbc:mysql://localhost:3307/test&quot;;
+		String user = &quot;root&quot;;
+		String password = &quot;123456&quot;;
+		
+		//1.获取Driver实现类对象
+		Class aClass = Class.forName(&quot;com.mysql.jdbc.Driver&quot;);//连接MySQL驱动这一步也可以省，但是建议不要省
+		//相较于方式三：可以省略如下步骤：
+		/*Driver driver = (Driver) aClass.newInstance();
+		//注册驱动registerDriver
+		DriverManager.registerDriver(driver);*/
+		
+		//为什么可以省略以上步骤？
+		/*
+		 * 在mySql的Driver实现类中声明了如下操作
+		 static {
+		 	try{
+		 		java.sql.DriverManager.registerDriver(new Driver());
+		 	}catch (SQLException E){
+		 		throw new RuntimeException(&quot;Can't register driver!&quot;);
+		 	}
+		 }
+		 */
+		
+		//获取连接
+		Connection conn = DriverManager.getConnection(url,user,password);
+		System.out.println(conn);
+	}
+</code></pre>
+<blockquote>
+<p>不必显式的注册驱动了。因为在DriverManager的源码中已经存在静态代码块，实现了驱动的注册</p>
+</blockquote>
+<h4 id="连接方式五最终方案">连接方式五(最终方案)</h4>
+<pre><code class="language-java">//方式五：
+@Test
+public void testConnection5() throws Exception{
+    //加载配置文件
+    InputStream is = ConnectionTest.Class.getClassLoader().getResourceAsStream(&quot;jdbc.properties&quot;);
+    Properties pros = new Properties();
+    pros.load(is);
+    
+    //读取配置信息
+    String url = pros.getProperty(&quot;url&quot;);
+    String user = pros.getProperty(&quot;user&quot;);
+    String password = pros.getProperty(&quot;password&quot;);
+    String driverClass = pros.getProperty(&quot;driverClass&quot;);
+    
+    //加载驱动
+    Class.forName(driverClass);
+    
+    //获取连接
+    Connection conn = DriverManager.getConnection(url,user,password);
+    System.out.println(conn);
+}
+</code></pre>
+<p>其中配置文件声明在工程的src目录下：[jdbc.properties]</p>
+<pre><code class="language-java">url=jdbc:mysql://localhost:3307/test
+user=root
+password=123456
+driverClass=com.mysql.jdbc.Driver
+</code></pre>
+<blockquote>
+<p>说明：使用配置文件的方式保存配置信息，在代码中加载配置文件</p>
+<p>使用配置文件的好处：</p>
+<p>​	①实现了代码和数据的分离，如果需要修改配置信息，直接在配置文件中修改，不需要深入代码</p>
+<p>​	②如果修改了 配置信息，省去重新编译的过程。</p>
+</blockquote>
+<h2 id="使用preparedstatement实现crud操作">使用PreparedStatement实现CRUD操作</h2>
+<h3 id="操作和访问数据库">操作和访问数据库</h3>
+<ul>
+<li>
+<p>数据库连接被用于向数据库服务器发送命令和SQL语句，并接受数据库连接就是一个Socket连接</p>
+</li>
+<li>
+<p>在Java.sql包中有3个接口分别定义了对数据库的调用的不同方式：</p>
+<ul>
+<li>
+<p><code>Statement</code>：用于执行动态SQL语句并返回它所生成结果的对象。</p>
+</li>
+<li>
+<p><code>PrepatedStatement</code>：SQL语句被预编译并存储在此对象中，可以使用此对象多次高效地执行该语句。</p>
+</li>
+<li>
+<p><code>CallableStatement</code>：用于执行SQL存储过程</p>
+<figure data-type="image" tabindex="8"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1566573842140.png" alt="1566573842140" loading="lazy"></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="使用statement操作数据库的弊端">使用Statement操作数据库的弊端</h3>
+<ul>
+<li>
+<p>通过调用Connection对象的createStatement()方法创建该对象。该对象用于执行静态的SQL语句，并且返回执行结果。</p>
+</li>
+<li>
+<p>Statemet接口中定义了下列方法用于执行SQL语句：</p>
+<pre><code class="language-java">int excuteUpdate(String sql)：执行更新操作INSERT、UPDATE、DELETE
+ResultSet executeQuery(String sql)：执行查询操作SELECT
+</code></pre>
+</li>
+<li>
+<p>但是使用Statement操作数据表存在弊端：</p>
+<ul>
+<li>问题一：存在拼串操作，繁琐</li>
+<li>问题二：存在SQL注入问题</li>
+</ul>
+</li>
+<li>
+<p>SQL 注入是利用某些系统没有对用户输入的数据进行充分的检查，而在用户输入数据中注入非法的 SQL 语句段 或命令(如：SELECT user, password FROM user_table WHERE user='a' OR 1 = ' AND password = ' OR '1' = '1') ，从而利用系统的 SQL 引擎完成恶意行为的做法。</p>
+</li>
+<li>
+<p>对于 Java 而言，要防范 SQL 注入，只要用 PreparedStatement(从Statement扩展而来) 取代 Statement 就可 以了。</p>
+</li>
+<li>
+<p>代码演示：</p>
+<pre><code class="language-java">public class StatementTest {
+
+	// 使用Statement的弊端：需要拼写sql语句，并且存在SQL注入的问题
+	@Test
+	public void testLogin() {
+		Scanner scan = new Scanner(System.in);
+
+		System.out.print(&quot;用户名：&quot;);
+		String userName = scan.nextLine();
+		System.out.print(&quot;密   码：&quot;);
+		String password = scan.nextLine();
+
+		// SELECT user,password FROM user_table WHERE USER = '1' or ' AND PASSWORD = '
+		// ='1' or '1' = '1';
+		String sql = &quot;SELECT user,password FROM user_table WHERE USER = '&quot; + userName + &quot;' AND PASSWORD = '&quot; + password
+				+ &quot;'&quot;;
+		User user = get(sql, User.class);
+		if (user != null) {
+			System.out.println(&quot;登陆成功!&quot;);
+		} else {
+			System.out.println(&quot;用户名或密码错误！&quot;);
+		}
+	}
+
+	// 使用Statement实现对数据表的查询操作
+	public &lt;T&gt; T get(String sql, Class&lt;T&gt; clazz) {
+		T t = null;
+
+		Connection conn = null;
+		Statement st = null;
+		ResultSet rs = null;
+		try {
+			// 1.加载配置文件
+			InputStream is = StatementTest.class.getClassLoader().getResourceAsStream(&quot;jdbc.properties&quot;);
+			Properties pros = new Properties();
+			pros.load(is);
+
+			// 2.读取配置信息
+			String user = pros.getProperty(&quot;user&quot;);
+			String password = pros.getProperty(&quot;password&quot;);
+			String url = pros.getProperty(&quot;url&quot;);
+			String driverClass = pros.getProperty(&quot;driverClass&quot;);
+
+			// 3.加载驱动
+			Class.forName(driverClass);
+
+			// 4.获取连接
+			conn = DriverManager.getConnection(url, user, password);
+
+			st = conn.createStatement();
+
+			rs = st.executeQuery(sql);
+
+			// 获取结果集的元数据
+			ResultSetMetaData rsmd = rs.getMetaData();
+
+			// 获取结果集的列数
+			int columnCount = rsmd.getColumnCount();
+
+			if (rs.next()) {
+
+				t = clazz.newInstance();
+
+				for (int i = 0; i &lt; columnCount; i++) {
+					// //1. 获取列的名称
+					// String columnName = rsmd.getColumnName(i+1);
+
+					// 1. 获取列的别名
+					String columnName = rsmd.getColumnLabel(i + 1);
+
+					// 2. 根据列名获取对应数据表中的数据
+					Object columnVal = rs.getObject(columnName);
+
+					// 3. 将数据表中得到的数据，封装进对象
+					Field field = clazz.getDeclaredField(columnName);
+					field.setAccessible(true);
+					field.set(t, columnVal);
+				}
+				return t;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			// 关闭资源
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (st != null) {
+				try {
+					st.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return null;
+	}
+
+}
+
+</code></pre>
+<p>综上：</p>
+<figure data-type="image" tabindex="9"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1566569819744.png" alt="1566569819744" loading="lazy"></figure>
+</li>
+</ul>
+<h3 id="preparedstatement的使用">PreparedStatement的使用</h3>
+<h4 id="preparedstatement介绍">PreparedStatement介绍</h4>
+<ul>
+<li>可以通过调用 Connection 对象的 preparedStatement(String sql) 方法获取 PreparedStatement 对象</li>
+<li>PreparedStatement 接口是 Statement 的子接口，它表示一条预编译过的 SQL 语句</li>
+<li>PreparedStatement 对象所代表的 SQL 语句中的参数用问号(?)来表示，调用 PreparedStatement 对象的 setXxx() 方法来设置这些参数. setXxx() 方法有两个参数，第一个参数是要设置的 SQL 语句中的参数的索引(从 1 开始)，第二个是设置的 SQL 语句中的参数的值</li>
+</ul>
+<h4 id="preparedstatement-vs-statement">PreparedStatement vs Statement</h4>
+<ul>
+<li>代码的可读性和可维护性</li>
+<li>PreparedStatement 能最大可能提高性能：
+<ul>
+<li>DBServer会对预编译语句提供性能优化。因为预编译语句有可能被重复调用，所以语句在被DBServer的 编译器编译后的执行代码被缓存下来，那么下次调用时只要是相同的预编译语句就不需要编译，只要将参数直接传入编译过的语句执行代码中就会得到执行。</li>
+<li>在statement语句中,即使是相同操作但因为数据内容不一样,所以整个语句本身不能匹配,没有缓存语句的意 义.事实是没有数据库会对普通语句编译后的执行代码缓存。这样每执行一次都要对传入的语句编译一次。</li>
+<li>(语法检查，语义检查，翻译成二进制命令，缓存)</li>
+</ul>
+</li>
+<li>PreparedStatement 可以防止SQL 注入</li>
+</ul>
+<h4 id="java与sql对应数据类型转换表">Java与SQL对应数据类型转换表</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Java类型</th>
+<th style="text-align:center">SQL类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">boolean</td>
+<td style="text-align:center">BIT</td>
+</tr>
+<tr>
+<td style="text-align:center">byte</td>
+<td style="text-align:center">TINYINT</td>
+</tr>
+<tr>
+<td style="text-align:center">short</td>
+<td style="text-align:center">SMALLINT</td>
+</tr>
+<tr>
+<td style="text-align:center">int</td>
+<td style="text-align:center">INTEGER</td>
+</tr>
+<tr>
+<td style="text-align:center">long</td>
+<td style="text-align:center">BIGINT</td>
+</tr>
+<tr>
+<td style="text-align:center">String</td>
+<td style="text-align:center">CHAR,VARCHAR,LONGVARCHAR</td>
+</tr>
+<tr>
+<td style="text-align:center">byte array</td>
+<td style="text-align:center">BINARY,VAR BINARY</td>
+</tr>
+<tr>
+<td style="text-align:center">java.sql.Date</td>
+<td style="text-align:center">DATE</td>
+</tr>
+<tr>
+<td style="text-align:center">java.sql.Time</td>
+<td style="text-align:center">TIME</td>
+</tr>
+<tr>
+<td style="text-align:center">java.sql.Timestamp</td>
+<td style="text-align:center">TIMESTAMP</td>
+</tr>
+</tbody>
+</table>
+<h4 id="使用preparedstatement实现增-删-改操作">使用PreparedStatement实现增、删、改操作</h4>
+<pre><code class="language-java">//通用的增、删、改操作（体现一：增、删、改 ； 体现二：针对于不同的表）
+public void update(String sql,Object ... args){
+	Connection conn = null;
+	PreparedStatement ps = null;
+	try {
+	//1.获取数据库的连接
+	conn = JDBCUtils.getConnection();
+	//2.获取PreparedStatement的实例 (或：预编译sql语句)
+	ps = conn.prepareStatement(sql);
+	//3.填充占位符
+	for(int i = 0;i &lt; args.length;i++){
+	ps.setObject(i + 1, args[i]);
+	}
+	//4.执行sql语句
+	ps.execute();
+	} catch (Exception e) {
+	e.printStackTrace();
+	}finally{
+	//5.关闭资源
+	JDBCUtils.closeResource(conn, ps);
+	}
+}
+</code></pre>
+<h4 id="使用preparedstatement实现查询操作">使用PreparedStatement实现查询操作</h4>
+<pre><code class="language-java">// 通用的针对于不同表的查询:返回一个对象 (version 1.0)
+public &lt;T&gt; T getInstance(Class&lt;T&gt; clazz, String sql, Object... args) {
+	Connection conn = null;
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	try {
+	// 1.获取数据库连接
+	conn = JDBCUtils.getConnection();
+	// 2.预编译sql语句，得到PreparedStatement对象
+	ps = conn.prepareStatement(sql);
+	// 3.填充占位符
+	for (int i = 0; i &lt; args.length; i++) {
+	ps.setObject(i + 1, args[i]);
+	}
+	// 4.执行executeQuery(),得到结果集：ResultSet
+	rs = ps.executeQuery();
+	// 5.得到结果集的元数据：ResultSetMetaData
+	ResultSetMetaData rsmd = rs.getMetaData();
+	// 6.1通过ResultSetMetaData得到columnCount,columnLabel；通过ResultSet得到列值
+	int columnCount = rsmd.getColumnCount();
+	if (rs.next()) {
+	T t = clazz.newInstance();
+	for (int i = 0; i &lt; columnCount; i++) {// 遍历每一个列
+	// 获取列值
+	Object columnVal = rs.getObject(i + 1);
+	// 获取列的别名:列的别名，使用类的属性名充当
+	String columnLabel = rsmd.getColumnLabel(i + 1);
+	// 6.2使用反射，给对象的相应属性赋值
+	Field field = clazz.getDeclaredField(columnLabel);
+	field.setAccessible(true);
+	field.set(t, columnVal);
+	}
+	return t;
+	}
+	} catch (Exception e) {
+	e.printStackTrace();
+	} finally {
+	// 7.关闭资源
+	JDBCUtils.closeResource(conn, ps, rs);
+	}
+	return null;
+}
+</code></pre>
+<blockquote>
+<p>说明：使用PreparedStatement实现的查询操作可以替换Statement实现的查询操作，解决Statement拼串和 SQL注入问题。</p>
+</blockquote>
+<h3 id="resultset与resultsetmetadata">ResultSet与ResultSetMetaData</h3>
+<h4 id="resultset"><code>ResultSet</code></h4>
+<ul>
+<li>
+<p>查询需要调用<code>PreparedStatement</code> 的 <code>executeQuery()</code> 方法，查询结果是一个<code>ResultSet</code> 对象</p>
+</li>
+<li>
+<p><code>ResultSet </code>对象以逻辑表格的形式封装了执行数据库操作的结果集，<code>ResultSet</code> 接口由数据库厂商提供实现</p>
+</li>
+<li>
+<p><code>ResultSet</code> 返回的实际上就是一张数据表。有一个指针指向数据表的第一条记录的前面。</p>
+</li>
+<li>
+<p><code>ResultSet</code> 对象维护了一个指向当前数据行的游标，初始的时候，游标在第一行之前，可以通过 <code>ResultSet</code> 对象 的 <code>next()</code> 方法移动到下一行。调用 next()方法检测下一行是否有效。若有效，该方法返回 true，且指针下移。 相当于Iterator对象的 hasNext() 和 next() 方法的结合体。</p>
+</li>
+<li>
+<p>当指针指向一行时, 可以通过调用 getXxx(int index) 或 getXxx(int columnName) 获取每一列的值。</p>
+<ul>
+<li>例如: getInt(1), getString(&quot;name&quot;)</li>
+<li>注意：Java与数据库交互涉及到的相关Java API中的索引都从1开始。</li>
+</ul>
+</li>
+<li>
+<p>ResultSet 接口的常用方法：</p>
+<ul>
+<li>
+<p>boolean next()</p>
+</li>
+<li>
+<p>getString()</p>
+<figure data-type="image" tabindex="10"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1555580152530.png" alt="1555580152530" loading="lazy"></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="resultsetmetadata">ResultSetMetaData</h4>
+<ul>
+<li>
+<p>可用于获取关于 ResultSet 对象中列的类型和属性信息的对象</p>
+</li>
+<li>
+<p>ResultSetMetaData meta = rs.getMetaData();</p>
+<ul>
+<li><code>getColumnName(int column)</code>：获取指定列的名称</li>
+<li><code>getColumnLabel(int column)</code>：获取指定列的别名</li>
+<li><code>getColumnCount()</code>：返回当前 ResultSet 对象中的列数。</li>
+<li><code>getColumnTypeName(int column)</code>：检索指定列的数据库特定的类型名称</li>
+<li><code>getColumnCount()</code>：返回当前 ResultSet 对象中的列数。</li>
+<li><code>etColumnTypeName(int column)</code>：检索指定列的数据库特定的类型名称。</li>
+<li><code>getColumnDisplaySize(int column)</code>：指示指定列的最大标准宽度，以字符为单位。</li>
+<li><code>sNullable(int column)</code>：指示指定列中的值是否可以为 null。</li>
+<li><code>isAutoIncrement(int column)</code>：指示是否自动为指定列进行编号，这样这些列仍然是只读的。</li>
+</ul>
+<figure data-type="image" tabindex="11"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1555579494691.png" alt="1555579494691" loading="lazy"></figure>
+<p><strong>问题1：得到结果集后, 如何知道该结果集中有哪些列 ？ 列名是什么？</strong></p>
+<p>需要使用一个描述 ResultSet 的对象， 即 ResultSetMetaData</p>
+<p><strong>问题2：关于ResultSetMetaData</strong></p>
+<ol>
+<li>
+<p><strong>如何获取 ResultSetMetaData：</strong></p>
+<p>调用 ResultSet 的 getMetaData() 方法</p>
+</li>
+<li>
+<p><strong>获取 ResultSet 中有多少列：</strong></p>
+<p>调用 ResultSetMetaData 的 getColumnCount() 方法</p>
+</li>
+<li>
+<p><strong>获取 ResultSet 每一列的列的别名是什么：</strong></p>
+<p>调用 ResultSetMetaData 的getColumnLabel() 方法</p>
+</li>
+</ol>
+<figure data-type="image" tabindex="12"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1555579816884.png" alt="1555579816884" loading="lazy"></figure>
+</li>
+</ul>
+<blockquote>
+<p>针对于表的字段名与类的属性名称不相同情况</p>
+<ol>
+<li>
+<p>必须声明sql时，使用类的属性名来命名字段的别名</p>
+</li>
+<li>
+<p>使用ResuktSetMetaData时，需要使用getColumnLabel()来替换getColumnName(),获取列的别名</p>
+<p>说明：如果sql中没有给字段起别名,getColumnLabel()获取的就是列名</p>
+</li>
+</ol>
+</blockquote>
+<h3 id="资源的释放">资源的释放</h3>
+<ul>
+<li>释放<code>ResultSet</code>, <code>Statement</code>,<code>Connection</code>。</li>
+<li>数据库连接（Connection）是非常稀有的资源，用完后必须马上释放，如果Connection不能及时正确的关闭将 导致系统宕机。Connection的使用原则是尽量晚创建，尽量早的释放。</li>
+<li>可以在finally中关闭，保证及时其他代码出现异常，资源也一定能被关闭。</li>
+</ul>
+<p>3.6JDBC API小结</p>
+<ul>
+<li>
+<p>两种思想</p>
+<ul>
+<li>面向接口编程的思想</li>
+<li>ORM思想(object relational mapping)
+<ul>
+<li>一个数据表对应一个java类</li>
+<li>表中的一条记录对应java类的一个对象</li>
+<li>表中的一个字段对应java类的一个属性</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>sql是需要结合列名和表的属性名来写。注意起别名。</p>
+</blockquote>
+</li>
+<li>
+<p>两种技术</p>
+<ul>
+<li>JDBC结果集的元数据：ResultSetMetaData
+<ul>
+<li>获取列数：getColumnCount()</li>
+<li>获取列的别名：getColumnLabel()</li>
+</ul>
+</li>
+<li>通过反射，创建指定类的对象，获取指定的属性并赋值</li>
+</ul>
+</li>
+</ul>
+<h2 id="操作blob类型字段">操作BLOB类型字段</h2>
+<h3 id="mysql-blob类型">MySQL BLOB类型</h3>
+<ul>
+<li>
+<p>MySQL中，BLOB是一个二进制大型对象，是一个可以存储大量数据的容器，它能容纳不同大小的数据。</p>
+</li>
+<li>
+<p>插入BLOB类型的数据必须使用PreparedStatement，因为BLOB类型的数据无法使用字符串拼接写的。</p>
+</li>
+<li>
+<p>MySQL的四种BLOB类型(除了在存储的最大信息量上不同外，他们是等同的)</p>
+<figure data-type="image" tabindex="13"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1555581069798.png" alt="1555581069798" loading="lazy"></figure>
+</li>
+<li>
+<p>实际使用中根据需要存入的数据大小定义不同的BLOB类型。</p>
+</li>
+<li>
+<p>需要注意的是：如果存储的文件过大，数据库的性能会下降</p>
+</li>
+<li>
+<p>如果在指定了相关的Blob类型以后，还报错：xxx too large，那么在mysql的安装目录下，找my.ini文件加上如 下的配置参数： max_allowed_packet=16M。同时注意：修改了my.ini文件之后，需要重新启动mysql服务。</p>
+</li>
+</ul>
+<h3 id="向数据表中插入大数据类型">向数据表中插入大数据类型</h3>
+<pre><code class="language-java">//获取连接
+Connection conn = JDBCUtils.getConnection();
+String sql = &quot;insert into customers(name,email,birth,photo)values(?,?,?,?)&quot;;
+PreparedStatement ps = conn.prepareStatement(sql);
+// 填充占位符
+ps.setString(1, &quot;张国荣&quot;);
+ps.setString(2, &quot;zgr@126.com&quot;);
+ps.setDate(3, new Date(new java.util.Date().getTime()));
+// 操作Blob类型的变量
+FileInputStream fis = new FileInputStream(&quot;zgr.png&quot;);
+ps.setBlob(4, fis);
+//执行
+ps.execute();
+fis.close();
+JDBCUtils.closeResource(conn, ps);
+</code></pre>
+<h3 id="修改数据表中国blob类型字段">修改数据表中国Blob类型字段</h3>
+<pre><code class="language-java">Connection conn = JDBCUtils.getConnection();
+String sql = &quot;update customers set photo = ? where id = ?&quot;;
+PreparedStatement ps = conn.prepareStatement(sql);
+// 填充占位符
+// 操作Blob类型的变量
+FileInputStream fis = new FileInputStream(&quot;coffee.png&quot;);
+ps.setBlob(1, fis);
+ps.setInt(2, 25);
+ps.execute();
+fis.close();
+JDBCUtils.closeResource(conn, ps);
+</code></pre>
+<h3 id="从数据表中读取大数据类型">从数据表中读取大数据类型</h3>
+<pre><code class="language-java">String sql = &quot;SELECT id, name, email, birth, photo FROM customer WHERE id = ?&quot;;
+conn = getConnection();
+ps = conn.prepareStatement(sql);
+ps.setInt(1, 8);
+rs = ps.executeQuery();
+if(rs.next()){
+	Integer id = rs.getInt(1);
+	String name = rs.getString(2);
+	String email = rs.getString(3);
+	Date birth = rs.getDate(4);
+	Customer cust = new Customer(id, name, email, birth);
+	System.out.println(cust);
+	//读取Blob类型的字段
+	Blob photo = rs.getBlob(5);
+	InputStream is = photo.getBinaryStream();
+	OutputStream os = new FileOutputStream(&quot;c.jpg&quot;);
+	byte [] buffer = new byte[1024];
+	int len = 0;
+	while((len = is.read(buffer)) != -1){
+	os.write(buffer, 0, len);
+	}
+	JDBCUtils.closeResource(conn, ps, rs);
+	if(is != null){
+	is.close();
+	}
+	if(os != null){
+	os.close();
+	}
+}
+</code></pre>
+<h2 id="批量插入">批量插入</h2>
+<h3 id="批量执行sql语句">批量执行SQL语句</h3>
+<p>当需要成批插入或者更新记录时，可以采用Java的批量更新机制，这一机制允许多条语句一次性提交给数据库批量处 理。通常情况下比单独提交处理更有效率</p>
+<p>JDBC的批量处理语句包括下面三个方法</p>
+<ul>
+<li>addBatch(String)：添加需要批量处理的SQL语句或是参数；</li>
+<li>executeBatch()：执行批量处理语句</li>
+<li>clearBatch()：清空缓存的数据</li>
+</ul>
+<p>通常会遇到两种批量执行SQL语句的情况：</p>
+<ul>
+<li>多条SQL语句的批量处理；</li>
+<li>一个SQL语句的批量传参；</li>
+</ul>
+<h3 id="高效的批量插入">高效的批量插入</h3>
+<p>举例：向数据表中插入20000条数据</p>
+<ul>
+<li>
+<p>数据库中提供一个goods表。创建如下：</p>
+<pre><code class="language-java">CREATE TABLE goods(
+id INT PRIMARY KEY AUTO_INCREMENT,
+NAME VARCHAR(20)
+);
+</code></pre>
+</li>
+</ul>
+<h4 id="实现层次一使用statement">实现层次一：使用Statement</h4>
+<pre><code class="language-java">Connection conn = JDBCUtils.getConnection();
+Statement st = conn.createStatement();
+for(int i = 1;i &lt;= 20000;i++){
+	String sql = &quot;insert into goods(name) values('name_' + &quot;+ i +&quot;)&quot;;
+	st.executeUpdate(sql);
+}
+</code></pre>
+<h4 id="实现层次二使用preparedstatement">实现层次二：使用PreparedStatement</h4>
+<pre><code class="language-java">long start = System.currentTimeMillis();
+Connection conn = JDBCUtils.getConnection();
+String sql = &quot;insert into goods(name)values(?)&quot;;
+PreparedStatement ps = conn.prepareStatement(sql);
+for(int i = 1;i &lt;= 20000;i++){
+	ps.setString(1, &quot;name_&quot; + i);
+	ps.executeUpdate();
+}
+long end = System.currentTimeMillis();
+System.out.println(&quot;花费的时间为：&quot; + (end - start));//82340
+JDBCUtils.closeResource(conn, ps);
+</code></pre>
+<h4 id="实现层次三">实现层次三</h4>
+<pre><code class="language-java">/*
+* 修改1： 使用 addBatch() / executeBatch() / clearBatch()
+* 修改2：mysql服务器默认是关闭批处理的，我们需要通过一个参数，让mysql开启批处理的支持。
+* ?rewriteBatchedStatements=true 写在配置文件的url后面
+* 修改3：使用更新的mysql 驱动：mysql-connector-java-5.1.37-bin.jar
+*
+*/
+@Test
+public void testInsert1() throws Exception{
+	long start = System.currentTimeMillis();
+	Connection conn = JDBCUtils.getConnection();
+	String sql = &quot;insert into goods(name)values(?)&quot;;
+	PreparedStatement ps = conn.prepareStatement(sql);
+	for(int i = 1;i &lt;= 1000000;i++){
+	ps.setString(1, &quot;name_&quot; + i);
+	//1.“攒”sql
+	ps.addBatch();
+	if(i % 500 == 0){
+	//2.执行
+	ps.executeBatch();
+	//3.清空
+	ps.clearBatch();
+	}
+}
+	long end = System.currentTimeMillis();
+	System.out.println(&quot;花费的时间为：&quot; + (end - start));//20000条：625
+//1000000条:14733
+	JDBCUtils.closeResource(conn, ps);
+}
+
+</code></pre>
+<h4 id="实现层次4">实现层次4</h4>
+<pre><code class="language-java">/*
+* 层次四：在层次三的基础上操作
+* 使用Connection 的 setAutoCommit(false) / commit()
+*/
+@Test
+public void testInsert2() throws Exception{
+long start = System.currentTimeMillis();
+Connection conn = JDBCUtils.getConnection();
+	//1.设置为不自动提交数据
+	conn.setAutoCommit(false);
+	String sql = &quot;insert into goods(name)values(?)&quot;;
+	PreparedStatement ps = conn.prepareStatement(sql);
+	for(int i = 1;i &lt;= 1000000;i++){
+	ps.setString(1, &quot;name_&quot; + i);
+	//1.“攒”sql
+	ps.addBatch();
+    if(i % 500 == 0){
+	//2.执行
+	ps.executeBatch();
+	//3.清空
+	ps.clearBatch();
+	}
+}
+	//2.提交数据
+	conn.commit();
+	long end = System.currentTimeMillis();
+	System.out.println(&quot;花费的时间为：&quot; + (end - start));//1000000条:4978
+	JDBCUtils.closeResource(conn, ps);
+}
+</code></pre>
+<h2 id="数据库事务">数据库事务</h2>
+<h3 id="数据库事务介绍">数据库事务介绍</h3>
+<ul>
+<li>事务：一组逻辑操作单元，使数据从一种状态转换到另一种状态。</li>
+<li>事务处理（事务操作）：保证所有事务都作为一个工作单元来执行，即使出了故障，都不能改变这种执行方式。当在一个事务中执行多个操作时，要么所有的事务都被提交(commit)，那么这些修改就永久地保存下来； 要么数据库管理系统将放弃所作的所有修改，整个事务回滚(rollback)到最初状态。</li>
+<li>为确保数据库中数据的一致性，数据的操纵应当是离散的成组的逻辑单元：当它全部完成时，数据的一致性可 以保持，而当这个单元中的一部分操作失败，整个事务应全部视为错误，所有从起始点以后的操作应全部回退 到开始状态。</li>
+</ul>
+<h3 id="jdbc事务处理">JDBC事务处理</h3>
+<ul>
+<li>
+<p>数据一旦提交，就不可回滚。</p>
+</li>
+<li>
+<p>数据什么时候意味着提交？</p>
+<ul>
+<li>当一个连接对象被创建时，默认情况下是自动提交事务：每次执行一个 SQL 语句时，如果执行成功，就会 向数据库自动提交，而不能回滚。</li>
+<li>关闭数据库连接，数据就会自动的提交。如果多个操作，每个操作使用的是自己单独的连接，则无法保证 事务。即同一个事务的多个操作必须在同一个连接下。</li>
+</ul>
+</li>
+<li>
+<p>JDBC程序中为了让多个SQL语句作为一个事务执行：</p>
+<ul>
+<li>调用 <code>Connection</code> 对象的 <code>setAutoCommit(false)</code>; 以取消自动提交事务</li>
+<li>在所有的 SQL 语句都成功执行后，调用 <code>commit()</code>; 方法提交事务</li>
+<li>在出现异常时，调用 <code>rollback()</code>; 方法回滚事务</li>
+</ul>
+<blockquote>
+<p>若此时 Connection 没有被关闭，还可能被重复使用，则需要恢复其自动提交状态 setAutoCommit(true)。尤其是在使用数据库连接池技术时，执行close()方法前，建议恢复自动提交状态。</p>
+</blockquote>
+</li>
+<li>
+<p>转账举例：</p>
+<pre><code class="language-java">public void testJDBCTransaction() {
+	Connection conn = null;
+	try {
+	// 1.获取数据库连接
+	conn = JDBCUtils.getConnection();
+	// 2.开启事务
+	conn.setAutoCommit(false);
+	// 3.进行数据库操作
+	String sql1 = &quot;update user_table set balance = balance - 100 where user = ?&quot;;
+	update(conn, sql1, &quot;AA&quot;);
+	// 模拟网络异常
+	//System.out.println(10 / 0);
+	String sql2 = &quot;update user_table set balance = balance + 100 where user = ?&quot;;
+	update(conn, sql2, &quot;BB&quot;);
+	// 4.若没有异常，则提交事务
+	conn.commit();
+	} catch (Exception e) {
+	e.printStackTrace();
+	// 5.若有异常，则回滚事务
+	try {
+	conn.rollback();
+	} catch (SQLException e1) {
+	e1.printStackTrace();
+	}
+	} finally {
+	try {
+	//6.恢复每次DML操作的自动提交功能
+	conn.setAutoCommit(true);
+	} catch (SQLException e) {
+	e.printStackTrace();
+	}
+	//7.关闭连接
+	JDBCUtils.closeResource(conn, null, null);
+	}
+}
+</code></pre>
+<p>其中，对数据库操作的方法为：</p>
+<pre><code class="language-java">//使用事务以后的通用的增删改操作（version 2.0）
+public void update(Connection conn ,String sql, Object... args) {
+	PreparedStatement ps = null;
+	try {
+	// 1.获取PreparedStatement的实例 (或：预编译sql语句)
+	ps = conn.prepareStatement(sql);
+	// 2.填充占位符
+	for (int i = 0; i &lt; args.length; i++) {
+	ps.setObject(i + 1, args[i]);
+}
+	// 3.执行sql语句
+    ps.execute();
+	} catch (Exception e) {
+	e.printStackTrace();
+	} finally {
+	// 4.关闭资源
+	JDBCUtils.closeResource(null, ps);
+	}
+}
+</code></pre>
+</li>
+</ul>
+<h3 id="事务的acid属性">事务的ACID属性</h3>
+<ol>
+<li><code>原子性（Atomicity）</code>原子性是指事务是一个不可分割的工作单位，事务中的操作要么都发生，要么都不发生。</li>
+<li><code>一致性（Consistency）</code> 事务必须使数据库从一个一致性状态变换到另外一个一致性状态</li>
+<li><code>隔离性（Isolation）</code> 事务的隔离性是指一个事务的执行不能被其他事务干扰，即一个事务内部的操作及使用的 数据对并发的其他事务是隔离的，并发执行的各个事务之间不能互相干扰。</li>
+<li><code>持久性（Durability）</code> 持久性是指一个事务一旦被提交，它对数据库中数据的改变就是永久性的，接下来的其 他操作和数据库故障不应该对其有任何影响。</li>
+</ol>
+<h4 id="数据库并发问题">数据库并发问题</h4>
+<ul>
+<li>对于同时运行的多个事务, 当这些事务访问数据库中相同的数据时, 如果没有采取必要的隔离机制, 就会导致各种 并发问题:
+<ul>
+<li><strong>脏读</strong>: 对于两个事务 T1, T2, T1 读取了已经被 T2 更新但还没有被提交的字段。之后, 若 T2 回滚, T1读取的 内容就是临时且无效的。</li>
+<li><strong>不可重复读</strong>: 对于两个事务T1, T2, T1 读取了一个字段, 然后 T2 更新了该字段。之后, T1再次读取同一个字 段, 值就不同了。</li>
+<li><strong>幻读</strong>: 对于两个事务T1, T2, T1 从一个表中读取了一个字段, 然后 T2 在该表中插入了一些新的行。之后, 如 果 T1 再次读取同一个表, 就会多出几行。</li>
+</ul>
+</li>
+<li><strong>数据库事务的隔离性</strong>: 数据库系统必须具有隔离并发运行各个事务的能力, 使它们不会相互影响, 避免各种并发问题。</li>
+<li>一个事务与其他事务隔离的程度称为隔离级别。数据库规定了多种事务隔离级别, 不同隔离级别对应不同的干扰 程度, 隔离级别越高, 数据一致性就越好, 但并发性越弱。</li>
+</ul>
+<h4 id="四种隔离级别">四种隔离级别</h4>
+<ul>
+<li>
+<p>数据库提供的4种事务隔离级别：</p>
+<figure data-type="image" tabindex="14"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1555586275271.png" alt="1555586275271" loading="lazy"></figure>
+</li>
+<li>
+<p>Oracle支持的2种事务隔离级别：READ COMMITED,SERIALIZABLE。Oracle默认的事务隔离级别为：<code>READ COMMITED.</code></p>
+</li>
+<li>
+<p>Mysql 支持 4 种事务隔离级别。Mysql 默认的事务隔离级别为: <code>REPEATABLE READ。</code></p>
+</li>
+</ul>
+<p>在MySql中设置隔离级别</p>
+<ul>
+<li>
+<p>每启动一个 mysql 程序, 就会获得一个单独的数据库连接. 每个数据库连接都有一个全局变量 @@tx_isolation, 表示当前的事务隔离级别。</p>
+</li>
+<li>
+<p>查看当前的隔离级别:</p>
+<pre><code class="language-mysql"> SELECT @@tx_isolation;
+</code></pre>
+</li>
+<li>
+<p>设置当前 mySQL 连接的隔离级别:</p>
+<pre><code class="language-mysql">set transaction isolation level read committed;
+</code></pre>
+</li>
+<li>
+<p>设置数据库系统的全局的隔离级别:</p>
+<pre><code class="language-mysql">set global transaction isolation level read committed;
+</code></pre>
+</li>
+<li>
+<p>补充操作：</p>
+<ul>
+<li>
+<p>创建mysql数据库用户：</p>
+<pre><code class="language-mysql">create user tom identified by 'abc123';
+</code></pre>
+</li>
+<li>
+<p>授予权限</p>
+<pre><code class="language-mysql">#授予通过网络方式登录的tom用户，对所有库所有表的全部权限，密码设为abc123.
+grant all privileges on *.* to tom@'%' identified by 'abc123';
+
+#给tom用户使用本地命令行方式，授予atguigudb这个库下的所有表的插删改查的权限。
+grant select,insert,delete,update on atguigudb.* to tom@localhost identified by
+'abc123';
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="dao及相关实现类">DAO及相关实现类</h2>
+<ul>
+<li>
+<p><code>DAO：（Data Access Object）</code>访问数据信息的类和接口，包括了对数据的CRUD（Create、Retrival、Update、 Delete），而不包含任何业务相关的信息。有时也称作：BaseDAO</p>
+</li>
+<li>
+<p>作用：为了实现功能的模块化，更有利于代码的维护和升级。</p>
+</li>
+<li>
+<p>下面是JavaWeb阶段书城项目中DAO使用的体现：</p>
+<figure data-type="image" tabindex="15"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1566726681515.png" alt="1566726681515" loading="lazy"></figure>
+</li>
+<li>
+<p>层次结构</p>
+<figure data-type="image" tabindex="16"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1566745811244.png" alt="1566745811244" loading="lazy"></figure>
+</li>
+</ul>
+<p><strong>【BaseDAO.java】</strong></p>
+<pre><code class="language-java">package com.atguigu.bookstore.dao;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
+/**
+* 定义一个用来被继承的对数据库进行基本操作的Dao
+*
+* @author HanYanBing
+*
+* @param &lt;T&gt;
+*/
+public abstract class BaseDao&lt;T&gt; {
+	private QueryRunner queryRunner = new QueryRunner();
+	// 定义一个变量来接收泛型的类型
+	private Class&lt;T&gt; type;
+	// 获取T的Class对象，获取泛型的类型，泛型是在被子类继承时才确定
+	public BaseDao() {
+	// 获取子类的类型
+	Class clazz = this.getClass();
+	// 获取父类的类型
+	// getGenericSuperclass()用来获取当前类的父类的类型
+	// ParameterizedType表示的是带泛型的类型
+	ParameterizedType parameterizedType = (ParameterizedType)
+clazz.getGenericSuperclass();
+	// 获取具体的泛型类型 getActualTypeArguments获取具体的泛型的类型
+	// 这个方法会返回一个Type的数组
+	Type[] types = parameterizedType.getActualTypeArguments();
+	// 获取具体的泛型的类型·
+	this.type = (Class&lt;T&gt;) types[0];
+	}
+/**
+* 通用的增删改操作
+*
+* @param sql
+* @param params
+* @return
+*/
+	public int update(Connection conn,String sql, Object... params) {
+	int count = 0;
+	try {
+	count = queryRunner.update(conn, sql, params);
+	} catch (SQLException e) {
+	e.printStackTrace();
+	}
+	return count;
+	}
+/**
+* 获取一个对象
+*
+* @param sql
+* @param params
+* @return
+*/
+public T getBean(Connection conn,String sql, Object... params) {
+    T t = null;
+	try {
+	t = queryRunner.query(conn, sql, new BeanHandler&lt;T&gt;(type), params);
+	} catch (SQLException e) {
+	e.printStackTrace();
+	}
+	return t;
+}
+/**
+* 获取所有对象
+*
+* @param sql
+* @param params
+* @return
+*/
+public List&lt;T&gt; getBeanList(Connection conn,String sql, Object... params) {
+	List&lt;T&gt; list = null;
+	try {
+	list = queryRunner.query(conn, sql, new BeanListHandler&lt;T&gt;(type),
+params);
+	} catch (SQLException e) {
+	e.printStackTrace();
+	}
+	return list;
+}
+/**
+* 获取一个但一值得方法，专门用来执行像 select count(*)...这样的sql语句
+*
+* @param sql
+* @param params
+* @return
+*/
+public Object getValue(Connection conn,String sql, Object... params) {
+	Object count = null;
+	try {
+	// 调用queryRunner的query方法获取一个单一的值
+	count = queryRunner.query(conn, sql, new ScalarHandler&lt;&gt;(), params);
+	} catch (SQLException e) {
+	e.printStackTrace();
+	}
+	return count;
+	}
+}
+</code></pre>
+<p><strong>【BookDAO.java】</strong></p>
+<pre><code class="language-java">package com.atguigu.bookstore.dao;
+
+import java.sql.Connection;
+import java.util.List;
+import com.atguigu.bookstore.beans.Book;
+import com.atguigu.bookstore.beans.Page;
+public interface BookDao {
+/**
+* 从数据库中查询出所有的记录
+*
+* @return
+*/
+	List&lt;Book&gt; getBooks(Connection conn);
+    
+/**
+* 向数据库中插入一条记录
+*
+* @param book
+*/
+	void saveBook(Connection conn,Book book);
+    
+/**
+* 从数据库中根据图书的id删除一条记录
+*
+* @param bookId
+*/
+	void deleteBookById(Connection conn,String bookId);
+    
+/**
+* 根据图书的id从数据库中查询出一条记录
+*
+* @param bookId
+* @return
+*/
+	Book getBookById(Connection conn,String bookId);
+    
+/**
+* 根据图书的id从数据库中更新一条记录
+*
+* @param book
+*/
+	void updateBook(Connection conn,Book book);
+    
+/**
+* 获取带分页的图书信息
+*
+* @param page：是只包含了用户输入的pageNo属性的page对象
+* @return 返回的Page对象是包含了所有属性的Page对象
+*/
+	Page&lt;Book&gt; getPageBooks(Connection conn,Page&lt;Book&gt; page);
+    
+/**
+* 获取带分页和价格范围的图书信息
+*
+* @param page：是只包含了用户输入的pageNo属性的page对象
+* @return 返回的Page对象是包含了所有属性的Page对象
+*/
+	Page&lt;Book&gt; getPageBooksByPrice(Connection conn,Page&lt;Book&gt; page, double minPrice,
+	double maxPrice);
+}
+</code></pre>
+<p><strong>【UserDAO.java】</strong></p>
+<pre><code class="language-java">package com.atguigu.bookstore.dao;
+import java.sql.Connection;
+import com.atguigu.bookstore.beans.User;
+public interface UserDao {
+/**
+* 根据User对象中的用户名和密码从数据库中获取一条记录
+*
+* @param user
+* @return User 数据库中有记录 null 数据库中无此记录
+*/
+	User getUser(Connection conn,User user);
+    
+/**
+* 根据User对象中的用户名从数据库中获取一条记录
+*
+* @param user
+* @return true 数据库中有记录 false 数据库中无此记录
+*/
+boolean checkUsername(Connection conn,User user);
+    
+/**
+* 向数据库中插入User对象
+*
+* @param user
+*/
+void saveUser(Connection conn,User user);
+}
+</code></pre>
+<p><strong>【BookDaoImpl.java】</strong></p>
+<pre><code class="language-java">package com.atguigu.bookstore.dao.impl;
+import java.sql.Connection;
+import java.util.List;
+import com.atguigu.bookstore.beans.Book;
+import com.atguigu.bookstore.beans.Page;
+
+import com.atguigu.bookstore.dao.BaseDao;
+import com.atguigu.bookstore.dao.BookDao;
+public class BookDaoImpl extends BaseDao&lt;Book&gt; implements BookDao {
+    
+	@Override
+	public List&lt;Book&gt; getBooks(Connection conn) {
+	// 调用BaseDao中得到一个List的方法
+	List&lt;Book&gt; beanList = null;
+	// 写sql语句
+	String sql = &quot;select id,title,author,price,sales,stock,img_path imgPath from
+	books&quot;;
+	beanList = getBeanList(conn,sql);
+	return beanList;
+	}
+	@Override
+	public void saveBook(Connection conn,Book book) {
+	// 写sql语句
+	String sql = &quot;insert into books(title,author,price,sales,stock,img_path)
+	values(?,?,?,?,?,?)&quot;;
+	// 调用BaseDao中通用的增删改的方法
+	update(conn,sql, book.getTitle(), book.getAuthor(), book.getPrice(),
+	book.getSales(), book.getStock(),book.getImgPath());
+	}
+	@Override
+	public void deleteBookById(Connection conn,String bookId) {
+	// 写sql语句
+	String sql = &quot;DELETE FROM books WHERE id = ?&quot;;
+	// 调用BaseDao中通用增删改的方法
+	update(conn,sql, bookId);
+	}
+	@Override
+	public Book getBookById(Connection conn,String bookId) {
+	// 调用BaseDao中获取一个对象的方法
+	Book book = null;
+	// 写sql语句
+	String sql = &quot;select id,title,author,price,sales,stock,img_path imgPath from
+	books where id = ?&quot;;
+	book = getBean(conn,sql, bookId);
+	return book;
+	}
+	@Override
+	public void updateBook(Connection conn,Book book) {
+	// 写sql语句
+	String sql = &quot;update books set title = ? , author = ? , price = ? , sales = ?
+	, stock = ? where id = ?&quot;;
+	// 调用BaseDao中通用的增删改的方法
+    update(conn,sql, book.getTitle(), book.getAuthor(), book.getPrice(),
+	book.getSales(), book.getStock(), book.getId());
+	}
+	@Override
+	public Page&lt;Book&gt; getPageBooks(Connection conn,Page&lt;Book&gt; page) {
+	// 获取数据库中图书的总记录数
+	String sql = &quot;select count(*) from books&quot;;
+	// 调用BaseDao中获取一个单一值的方法
+	long totalRecord = (long) getValue(conn,sql);
+	// 将总记录数设置都page对象中
+	page.setTotalRecord((int) totalRecord);
+	// 获取当前页中的记录存放的List
+	String sql2 = &quot;select id,title,author,price,sales,stock,img_path imgPath from
+books limit ?,?&quot;;
+	// 调用BaseDao中获取一个集合的方法
+	List&lt;Book&gt; beanList = getBeanList(conn,sql2, (page.getPageNo() - 1) *
+Page.PAGE_SIZE, Page.PAGE_SIZE);
+	// 将这个List设置到page对象中
+	page.setList(beanList);
+	return page;
+}
+	@Override
+	public Page&lt;Book&gt; getPageBooksByPrice(Connection conn,Page&lt;Book&gt; page, double
+minPrice, double maxPrice) {
+	// 获取数据库中图书的总记录数
+	String sql = &quot;select count(*) from books where price between ? and ?&quot;;
+	// 调用BaseDao中获取一个单一值的方法
+	long totalRecord = (long) getValue(conn,sql,minPrice,maxPrice);
+	// 将总记录数设置都page对象中
+	page.setTotalRecord((int) totalRecord);
+	// 获取当前页中的记录存放的List
+	String sql2 = &quot;select id,title,author,price,sales,stock,img_path imgPath from
+books where price between ? and ? limit ?,?&quot;;
+	// 调用BaseDao中获取一个集合的方法
+	List&lt;Book&gt; beanList = getBeanList(conn,sql2, minPrice , maxPrice ,
+(page.getPageNo() - 1) * Page.PAGE_SIZE, Page.PAGE_SIZE);
+	// 将这个List设置到page对象中
+	page.setList(beanList);
+	return page;
+	}
+}
+</code></pre>
+<p><strong>【UserDaoImpl.java】</strong></p>
+<pre><code class="language-java">package com.atguigu.bookstore.dao.impl;
+import java.sql.Connection;
+import com.atguigu.bookstore.beans.User;
+import com.atguigu.bookstore.dao.BaseDao;
+import com.atguigu.bookstore.dao.UserDao;
+public class UserDaoImpl extends BaseDao&lt;User&gt; implements UserDao {
+	@Override
+	public User getUser(Connection conn,User user) {
+	// 调用BaseDao中获取一个对象的方法
+	User bean = null;
+	// 写sql语句
+	String sql = &quot;select id,username,password,email from users where username = ?
+	and password = ?&quot;;
+	bean = getBean(conn,sql, user.getUsername(), user.getPassword());
+	return bean;
+}
+	@Override
+	public boolean checkUsername(Connection conn,User user) {
+	// 调用BaseDao中获取一个对象的方法
+	User bean = null;
+	// 写sql语句
+	String sql = &quot;select id,username,password,email from users where username =
+	?&quot;;
+	bean = getBean(conn,sql, user.getUsername());
+	return bean != null;
+}
+	@Override
+	public void saveUser(Connection conn,User user) {
+	//写sql语句
+	String sql = &quot;insert into users(username,password,email) values(?,?,?)&quot;;
+	//调用BaseDao中通用的增删改的方法
+	update(conn,sql, 	user.getUsername(),user.getPassword(),user.getEmail());
+	}
+}
+</code></pre>
+<p><strong>[Book.java]</strong></p>
+<pre><code class="language-java">package com.atguigu.bookstore.beans;
+/**
+* 图书类
+* @author songhongkang
+*
+*/
+	public class Book {
+	private Integer id;
+	private String title; // 书名
+    private String author; // 作者
+	private double price; // 价格
+	private Integer sales; // 销量
+	private Integer stock; // 库存
+	private String imgPath = &quot;static/img/default.jpg&quot;; // 封面图片的路径
+	//构造器，get()，set()，toString()方法略
+}
+</code></pre>
+<p><strong>[Page.java]</strong></p>
+<pre><code class="language-java">package com.atguigu.bookstore.beans;
+import java.util.List;
+/**
+* 页码类
+* @author songhongkang
+*
+*/
+	public class Page&lt;T&gt; {
+	private List&lt;T&gt; list; // 每页查到的记录存放的集合
+	public static final int PAGE_SIZE = 4; // 每页显示的记录数
+	private int pageNo; // 当前页
+	// private int totalPageNo; // 总页数，通过计算得到
+	private int totalRecord; // 总记录数，通过查询数据库得到
+</code></pre>
+<p><strong>[User.java]</strong></p>
+<pre><code class="language-java">package com.atguigu.bookstore.beans;
+/**
+* 用户类
+* @author songhongkang
+*
+*/
+	public class User {
+	private Integer id;
+	private String username;
+	private String password;
+	private String email;
+</code></pre>
+<h2 id="数据库连接池">数据库连接池</h2>
+<h3 id="jdbc数据库连接池的必要性">JDBC数据库连接池的必要性</h3>
+<ul>
+<li>
+<p>在使用开发基于数据库的web程序时，传统的模式基本是按以下步骤：</p>
+<ul>
+<li>在主程序（如servlet、beans）中建立数据库连接</li>
+<li>进行sql操作</li>
+<li>断开数据库连接</li>
+</ul>
+</li>
+<li>
+<p>这种模式开发，存在的问题:</p>
+<ul>
+<li>普通的JDBC数据库连接使用 DriverManager 来获取，每次向数据库建立连接的时候都要将 Connection 加载到内存中，再验证用户名和密码(得花费0.05s～1s的时间)。需要数据库连接的时候，就向数据库要求 一个，执行完成后再断开连接。这样的方式将会消耗大量的资源和时间。数据库的连接资源并没有得到很 好的重复利用。若同时有几百人甚至几千人在线，频繁的进行数据库连接操作将占用很多的系统资源，严 重的甚至会造成服务器的崩溃。</li>
+<li>对于每一次数据库连接，使用完后都得断开。否则，如果程序出现异常而未能关闭，将会导致数据库系统 中的内存泄漏，最终将导致重启数据库。（回忆：何为Java的内存泄漏？）</li>
+<li>这种开发不能控制被创建的连接对象数，系统资源会被毫无顾及的分配出去，如连接过多，也可能导致内 存泄漏，服务器崩溃。</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据库连接池技术">数据库连接池技术</h3>
+<ul>
+<li>
+<p>为解决传统开发中的数据库连接问题，可以采用数据库连接池技术。</p>
+</li>
+<li>
+<p>数据库连接池的基本思想：就是为数据库连接建立一个“缓冲池”。预先在缓冲池中放入一定数量的连接，当需要 建立数据库连接时，只需从“缓冲池”中取出一个，使用完毕之后再放回去。</p>
+</li>
+<li>
+<p>数据库连接池负责分配、管理和释放数据库连接，它允许应用程序重复使用一个现有的数据库连接，而不是重 新建立一个。</p>
+</li>
+<li>
+<p>数据库连接池在初始化时将创建一定数量的数据库连接放到连接池中，这些数据库连接的数量是由最小数据库 连接数来设定的。无论这些数据库连接是否被使用，连接池都将一直保证至少拥有这么多的连接数量。连接池 的最大数据库连接数量限定了这个连接池能占有的最大连接数，当应用程序向连接池请求的连接数超过最大连 接数量时，这些请求将被加入到等待队列中。</p>
+<figure data-type="image" tabindex="17"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1555593464033.png" alt="1555593464033" loading="lazy"></figure>
+</li>
+<li>
+<p>工作原理：</p>
+<figure data-type="image" tabindex="18"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1555593497474.png" alt="1555593497474" loading="lazy"></figure>
+</li>
+<li>
+<p>数据库连接池技术的优点</p>
+<ol>
+<li>
+<p><strong>资源重用</strong></p>
+<p>由于数据库连接得以重用，避免了频繁创建，释放连接引起的大量性能开销。在减少系统消耗的基础上，另一 方面也增加了系统运行环境的平稳性。</p>
+</li>
+<li>
+<p><strong>更快的系统反应速度</strong></p>
+</li>
+</ol>
+<p>数据库连接池在初始化过程中，往往已经创建了若干数据库连接置于连接池中备用。此时连接的初始化工作均 已完成。对于业务请求处理而言，直接利用现有可用连接，避免了数据库连接初始化和释放过程的时间开销， 从而减少了系统的响应时间</p>
+<ol start="3">
+<li>
+<p><strong>新的资源分配手段</strong></p>
+<p>对于多应用共享同一数据库的系统而言，可在应用层通过数据库连接池的配置，实现某一应用最大可用数据库 连接数的限制，避免某一应用独占所有的数据库资源</p>
+</li>
+<li>
+<p><strong>统一的连接管理，避免数据库连接泄漏</strong></p>
+<p>在较为完善的数据库连接池实现中，可根据预先的占用超时设定，强制回收被占用连接，从而避免了常规数据 库连接操作中可能出现的资源泄露</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="多种开源的数据库连接池">多种开源的数据库连接池</h3>
+<ul>
+<li>JDBC 的数据库连接池使用 javax.sql.DataSource 来表示，DataSource 只是一个接口，该接口通常由服务器 (Weblogic, WebSphere, Tomcat)提供实现，也有一些开源组织提供实现：
+<ul>
+<li>DBCP 是Apache提供的数据库连接池。tomcat 服务器自带dbcp数据库连接池。速度相对c3p0较快，但因 自身存在BUG，Hibernate3已不再提供支持。</li>
+<li>C3P0 是一个开源组织提供的一个数据库连接池，速度相对较慢，稳定性还可以。hibernate官方推荐使用 Proxool 是sourceforge下的一个开源项目数据库连接池，有监控连接池状态的功能，稳定性较c3p0差一 点</li>
+<li>BoneCP 是一个开源组织提供的数据库连接池，速度快</li>
+<li>Druid 是阿里提供的数据库连接池，据说是集DBCP 、C3P0 、Proxool 优点于一身的数据库连接池，但是 速度不确定是否有BoneCP快</li>
+</ul>
+</li>
+<li>DataSource 通常被称为数据源，它包含连接池和连接池管理两个部分，习惯上也经常把 DataSource 称为连接池</li>
+<li>DataSource用来取代DriverManager来获取Connection，获取速度快，同时可以大幅度提高数据库访问速度。</li>
+<li>特别注意：
+<ul>
+<li>数据源和数据库连接不同，数据源无需创建多个，它是产生数据库连接的工厂，因此整个应用只需要一个数据源即可。</li>
+<li>当数据库访问结束后，程序还是像以前一样关闭数据库连接：conn.close(); 但conn.close()并没有关闭数 据库的物理连接，它仅仅把数据库连接释放，归还给了数据库连接池。</li>
+</ul>
+</li>
+</ul>
+<h4 id="c3p0数据库连接池">C3P0数据库连接池</h4>
+<ul>
+<li>获取连接方式一</li>
+</ul>
+<pre><code class="language-java">//使用C3P0数据库连接池的方式，获取数据库的连接：不推荐
+public static Connection getConnection1() throws Exception{
+	ComboPooledDataSource cpds = new ComboPooledDataSource();
+	cpds.setDriverClass(&quot;com.mysql.jdbc.Driver&quot;);
+	cpds.setJdbcUrl(&quot;jdbc:mysql://localhost:3306/test&quot;);
+	cpds.setUser(&quot;root&quot;);
+	cpds.setPassword(&quot;abc123&quot;);
+	// cpds.setMaxPoolSize(100);
+	Connection conn = cpds.getConnection();
+	return conn;
+}
+</code></pre>
+<ul>
+<li>获取连接方式二</li>
+</ul>
+<pre><code class="language-java">//使用C3P0数据库连接池的配置文件方式，获取数据库的连接：推荐
+	private static DataSource cpds = new ComboPooledDataSource(&quot;helloc3p0&quot;);
+	public static Connection getConnection2() throws 	SQLException{
+	Connection conn = cpds.getConnection();
+	return conn;
+}
+</code></pre>
+<p>其中，src下的配置文件为：【c3p0-config.xml】</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;c3p0-config&gt;
+	&lt;named-config name=&quot;helloc3p0&quot;&gt;
+	&lt;!-- 获取连接的4个基本信息 --&gt;
+	&lt;property name=&quot;user&quot;&gt;root&lt;/property&gt;
+	&lt;property name=&quot;password&quot;&gt;abc123&lt;/property&gt;
+	&lt;property name=&quot;jdbcUrl&quot;&gt;jdbc:mysql:///test&lt;/property&gt;
+	&lt;property name=&quot;driverClass&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;
+        
+	&lt;!-- 涉及到数据库连接池的管理的相关属性的设置 --&gt;
+	&lt;!-- 若数据库中连接数不足时, 一次向数据库服务器申请多少个连接 --&gt;
+	&lt;property name=&quot;acquireIncrement&quot;&gt;5&lt;/property&gt;
+	&lt;!-- 初始化数据库连接池时连接的数量 --&gt;
+	&lt;property name=&quot;initialPoolSize&quot;&gt;5&lt;/property&gt;
+	&lt;!-- 数据库连接池中的最小的数据库连接数 --&gt;
+	&lt;property name=&quot;minPoolSize&quot;&gt;5&lt;/property&gt;
+    &lt;!-- 数据库连接池中的最大的数据库连接数 --&gt;
+	&lt;property name=&quot;maxPoolSize&quot;&gt;10&lt;/property&gt;
+        
+	&lt;!-- C3P0 数据库连接池可以维护的 Statement 的个数 --&gt;
+	&lt;property name=&quot;maxStatements&quot;&gt;20&lt;/property&gt;
+	&lt;!-- 每个连接同时可以使用的 Statement 对象的个数 --&gt;
+	&lt;property name=&quot;maxStatementsPerConnection&quot;&gt;5&lt;/property&gt;
+        
+	&lt;/named-config&gt;
+&lt;/c3p0-config&gt;    
+</code></pre>
+<h4 id="dbcp数据库连接池">DBCP数据库连接池</h4>
+<ul>
+<li>
+<p>DBCP 是 Apache 软件基金组织下的开源连接池实现，该连接池依赖该组织下的另一个开源系统：Commonpool。如需使用该连接池实现，应在系统中增加如下两个 jar 文件：</p>
+<ul>
+<li>Commons-dbcp.jar：连接池的实现</li>
+<li>Commons-pool.jar：连接池实现的依赖库</li>
+</ul>
+</li>
+<li>
+<p>Tomcat 的连接池正是采用该连接池来实现的。该数据库连接池既可以与应用服务器整合使用，也可由应用程序独立使用。</p>
+</li>
+<li>
+<p>数据源和数据库连接不同，数据源无需创建多个，它是产生数据库连接的工厂，因此整个应用只需要一个数据源即可。</p>
+</li>
+<li>
+<p>当数据库访问结束后，程序还是像以前一样关闭数据库连接：conn.close(); 但上面的代码并没有关闭数据库的 物理连接，它仅仅把数据库连接释放，归还给了数据库连接池。</p>
+</li>
+<li>
+<p>配置属性说明</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">默认值</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">initialSize</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">连接池启动时创建的初始化连接数量</td>
+</tr>
+<tr>
+<td style="text-align:center">maxActive</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">连接池中可同时连接的最大连接数</td>
+</tr>
+<tr>
+<td style="text-align:center">maxIdle</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">连接池中最大的空闲的连接数，超过的空闲连接将被释放，如果 设置为负数表示不限制</td>
+</tr>
+<tr>
+<td style="text-align:center">minIdle</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">连接池中最小的空闲的连接数，低于这个数量会被创建新的连 接。该参数越接近maxIdle，性能越好，因为连接的创建和销 毁，都是需要消耗资源的；但是不能太大。</td>
+</tr>
+<tr>
+<td style="text-align:center">maxWait</td>
+<td style="text-align:center">无限制</td>
+<td style="text-align:center">最大等待时间，当没有可用连接时，连接池等待连接释放的最大 时间，超过该时间限制会抛出异常，如果设置-1表示无限等待</td>
+</tr>
+<tr>
+<td style="text-align:center">poolPreparedStatements</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">开启池的Statement是否prepared</td>
+</tr>
+<tr>
+<td style="text-align:center">maxOpenPreparedStatements</td>
+<td style="text-align:center">无限制</td>
+<td style="text-align:center">开启池的prepared 后的同时最大连接数</td>
+</tr>
+<tr>
+<td style="text-align:center">minEvictableIdleTimeMillis</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">连接池中连接，在时间段内一直空闲， 被逐出连接池的时间</td>
+</tr>
+<tr>
+<td style="text-align:center">removeAbandonedTimeout</td>
+<td style="text-align:center">300</td>
+<td style="text-align:center">超过时间限制，回收没有用(废弃)的连接</td>
+</tr>
+<tr>
+<td style="text-align:center">removeAbandoned</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">超过removeAbandonedTimeout时间后，是否进 行没用连接 （废弃）的回收</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>获取连接方式一：</p>
+</li>
+</ul>
+<pre><code class="language-java">public static Connection getConnection3() throws Exception {
+	BasicDataSource source = new BasicDataSource();
+	source.setDriverClassName(&quot;com.mysql.jdbc.Driver&quot;);
+	source.setUrl(&quot;jdbc:mysql:///test&quot;);
+	source.setUsername(&quot;root&quot;);
+	source.setPassword(&quot;abc123&quot;);
+	//
+	source.setInitialSize(10);
+	Connection conn = source.getConnection();
+	return conn;
+}
+</code></pre>
+<ul>
+<li>获取连接方式二：</li>
+</ul>
+<pre><code class="language-java">//使用dbcp数据库连接池的配置文件方式，获取数据库的连接：推荐
+private static DataSource source = null;
+static{
+	try {
+	Properties pros = new Properties();
+	InputStream is =
+	DBCPTest.class.getClassLoader().getResourceAsStream(&quot;dbcp.properties&quot;);
+	pros.load(is);
+	//根据提供的BasicDataSourceFactory创建对应的DataSource对象
+	source = BasicDataSourceFactory.createDataSource(pros);
+	} catch (Exception e) {
+	e.printStackTrace();
+	}
+}
+	public static Connection getConnection4() throws Exception {
+	Connection conn = source.getConnection();
+	return conn;
+}
+</code></pre>
+<p>其中，src下的配置文件为：【dbcp.properties】</p>
+<pre><code class="language-properties">driverClassName=com.mysql.jdbc.Driver
+url=jdbc:mysql://localhost:3306/test?
+rewriteBatchedStatements=true&amp;useServerPrepStmts=false
+username=root
+password=abc123
+initialSize=10
+#...
+</code></pre>
+<h4 id="druid德鲁伊数据库连接池">Druid（德鲁伊）数据库连接池</h4>
+<p>Druid是阿里巴巴开源平台上一个数据库连接池实现，它结合了C3P0、DBCP、Proxool等DB池的优点，同时加入了 日志监控，可以很好的监控DB池连接和SQL的执行情况，可以说是针对监控而生的DB连接池，<strong>可以说是目前最好的连接池之一。</strong></p>
+<pre><code class="language-java">package com.atguigu.druid;
+import java.sql.Connection;
+import java.util.Properties;
+import javax.sql.DataSource;
+import com.alibaba.druid.pool.DruidDataSourceFactory;
+public class TestDruid {
+	public static void main(String[] args) throws Exception {
+	Properties pro = new Properties();
+	pro.load(TestDruid.class.getClassLoader().getResourceAsStream(&quot;druid.properties&quot;));
+	DataSource ds = DruidDataSourceFactory.createDataSource(pro);
+	Connection conn = ds.getConnection();
+	System.out.println(conn);
+	}
+}
+</code></pre>
+<p>其中，src下的配置文件为：【druid.properties】</p>
+<pre><code class="language-properties">url=jdbc:mysql://localhost:3306/test?rewriteBatchedStatements=true
+username=root
+password=123456
+driverClassName=com.mysql.jdbc.Driver
+
+initialSize=10
+maxActive=20
+maxWait=1000
+filters=wall
+</code></pre>
+<ul>
+<li>
+<p>详细配置参数：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">配置</th>
+<th style="text-align:center">缺省</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">name</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">配置这个属性的意义在于，如果存在多个数据源，监控的时候可以通过 名字来区分开来。 如果没有配置，将会生成一个名字，格式 是：”DataSource-” + System.identityHashCode(this)</td>
+</tr>
+<tr>
+<td style="text-align:center">url</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">连接数据库的url，不同数据库不一样。例如：mysql : jdbc:mysql://10.20.153.104:3306/druid2 oracle : jdbc:oracle:thin:@10.20.149.85:1521:ocnauto</td>
+</tr>
+<tr>
+<td style="text-align:center">username</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">连接数据库的用户名</td>
+</tr>
+<tr>
+<td style="text-align:center">password</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">连接数据库的密码。如果你不希望密码直接写在配置文件中，可以使用 ConfigFilter。详细看这里：https://github.com/alibaba/druid/wiki/% E4%BD%BF%E7%94%A8ConfigFilter</td>
+</tr>
+<tr>
+<td style="text-align:center">driverClassName</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">根据url自动识别 这一项可配可不配，如果不配置druid会根据url自动 识别dbType，然后选择相应的driverClassName(建议配置下)</td>
+</tr>
+<tr>
+<td style="text-align:center">initialSize</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">初始化时建立物理连接的个数。初始化发生在显示调用init方法，或者 第一次getConnection时</td>
+</tr>
+<tr>
+<td style="text-align:center">maxActive</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">最大连接池数量</td>
+</tr>
+<tr>
+<td style="text-align:center">maxIdle</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">已经不再使用，配置了也没效果</td>
+</tr>
+<tr>
+<td style="text-align:center">minIdle</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">最小连接池数量</td>
+</tr>
+<tr>
+<td style="text-align:center">maxWait</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">获取连接时最大等待时间，单位毫秒。配置了maxWait之后，缺省启 用公平锁，并发效率会有所下降，如果需要可以通过配置 useUnfairLock属性为true使用非公平锁。</td>
+</tr>
+<tr>
+<td style="text-align:center">poolPreparedStatements</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">是否缓存preparedStatement，也就是PSCache。PSCache对支持游 标的数据库性能提升巨大，比如说oracle。在mysql下建议关闭。</td>
+</tr>
+<tr>
+<td style="text-align:center">maxOpenPreparedStatements</td>
+<td style="text-align:center">-1</td>
+<td style="text-align:center">要启用PSCache，必须配置大于0，当大于0时， poolPreparedStatements自动触发修改为true。在Druid中，不会存 在Oracle下PSCache占用内存过多的问题，可以把这个数值配置大一 些，比如说100</td>
+</tr>
+<tr>
+<td style="text-align:center">validationQuery</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">用来检测连接是否有效的sql，要求是一个查询语句。如果 validationQuery为null，testOnBorrow、testOnReturn、 testWhileIdle都不会其作用。</td>
+</tr>
+<tr>
+<td style="text-align:center">testOnBorrow</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center">申请连接时执行validationQuery检测连接是否有效，做了这个配置会 降低性能。</td>
+</tr>
+<tr>
+<td style="text-align:center">testOnReturn</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">归还连接时执行validationQuery检测连接是否有效，做了这个配置会 降低性能</td>
+</tr>
+<tr>
+<td style="text-align:center">testWhileIdle</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center">建议配置为true，不影响性能，并且保证安全性。申请连接的时候检 测，如果空闲时间大于timeBetweenEvictionRunsMillis，执行 validationQuery检测连接是否有效。</td>
+</tr>
+<tr>
+<td style="text-align:center">timeBetweenEvictionRunsMillis</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">有两个含义： 1)Destroy线程会检测连接的间隔时间2)testWhileIdle的 判断依据，详细看testWhileIdle属性的说明</td>
+</tr>
+<tr>
+<td style="text-align:center">numTestsPerEvictionRun</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">不再使用，一个DruidDataSource只支持一个EvictionRun</td>
+</tr>
+<tr>
+<td style="text-align:center">minEvictableIdleTimeMillis</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">connectionInitSqls</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">物理连接初始化的时候执行的sql</td>
+</tr>
+<tr>
+<td style="text-align:center">exceptionSorter</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">根据dbType自动识别 当数据库抛出一些不可恢复的异常时，抛弃连接</td>
+</tr>
+<tr>
+<td style="text-align:center">filters</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">属性类型是字符串，通过别名的方式配置扩展插件，常用的插件有： 监控统计用的filter:stat日志用的filter:log4j防御sql注入的filter:wall</td>
+</tr>
+<tr>
+<td style="text-align:center">proxyFilters</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">类型是List，如果同时配置了filters和proxyFilters，是组合关系，并非 替换关系</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h2 id="apache-dbutils实现crud操作">Apache-DBUtils实现CRUD操作</h2>
+<h3 id="apache-dbutils简介">Apache-DBUtils简介</h3>
+<ul>
+<li>
+<p>commons-dbutils 是 Apache 组织提供的一个开源 JDBC工具类库，它是对JDBC的简单封装，学习成本极低， 并且使用dbutils能极大简化jdbc编码的工作量，同时也不会影响程序的性能。</p>
+<ul>
+<li>
+<p>API介绍：</p>
+<ul>
+<li>org.apache.commons.dbutils.QueryRunner</li>
+<li>org.apache.commons.dbutils.ResultSetHandler</li>
+<li>工具类：org.apache.commons.dbutils.DbUtils</li>
+</ul>
+</li>
+<li>
+<p>API包说明：<img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1555595163263.png" alt="1555595163263" loading="lazy"></p>
+<figure data-type="image" tabindex="19"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/1555595198644.png" alt="1555595198644" loading="lazy"></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="主要api的使用">主要API的使用</h3>
+<h4 id="dbutils">DbUtils</h4>
+<ul>
+<li>DbUtils ：提供如关闭连接、装载JDBC驱动程序等常规工作的工具类，里面的所有方法都是静态的。主要方法 如下：
+<ul>
+<li>public static void close(…) throws java.sql.SQLException： DbUtils类提供了三个重载的关闭方 法。这些方法检查所提供的参数是不是NULL，如果不是的话，它们就关闭Connection、Statement和 ResultSet。</li>
+<li>public static void closeQuietly(…): 这一类方法不仅能在Connection、Statement和ResultSet为NULL情 况下避免关闭，还能隐藏一些在程序中抛出的SQLEeception。</li>
+<li>public static void commitAndClose(Connection conn)throws SQLException： 用来提交连接的事务， 然后关闭连接</li>
+<li>public static void commitAndCloseQuietly(Connection conn)： 用来提交连接，然后关闭连接，并且在 关闭连接时不抛出SQL异常。</li>
+<li>public static void rollback(Connection conn)throws SQLException：允许conn为null，因为方法内部做了判断</li>
+<li><code>public static void rollbackAndClose(Connection conn)throws SQLException</code></li>
+<li>rollbackAndCloseQuietly(Connection)</li>
+<li>public static boolean loadDriver(java.lang.String driverClassName)：这一方装载并注册JDBC驱动程 序，如果成功就返回true。使用该方法，你不需要捕捉这个异常ClassNotFoundException。</li>
+</ul>
+</li>
+</ul>
+<h4 id="queryrunner类">QueryRunner类</h4>
+<ul>
+<li>该类简单化了SQL查询，它与ResultSetHandler组合在一起使用可以完成大部分的数据库操作，能够大大减少编码量。</li>
+<li>QueryRunner类提供了两个构造器：
+<ul>
+<li>默认的构造器</li>
+<li>需要一个 javax.sql.DataSource 来作参数的构造器</li>
+</ul>
+</li>
+<li>QueryRunner类的主要方法：
+<ul>
+<li><strong>更新</strong>
+<ul>
+<li>public int update(Connection conn, String sql, Object... params) throws SQLException:用来执行 一个更新（插入、更新或删除）操作。</li>
+</ul>
+</li>
+<li><strong>插入</strong>
+<ul>
+<li>public T insert(Connection conn,String sql,ResultSetHandler rsh, Object... params) throws SQLException：只支持INSERT语句，其中 rsh - The handler used to create the result object from the ResultSet of auto-generated keys. 返回值: An object generated by the handler.即自动生成的键值</li>
+</ul>
+</li>
+<li><strong>批处理</strong>
+<ul>
+<li>public int[] batch(Connection conn,String sql,Object[][] params)throws SQLException： INSERT, UPDATE, or DELETE语句</li>
+<li>public T insertBatch(Connection conn,String sql,ResultSetHandler rsh,Object[][] params)throws SQLException：只支持INSERT语句</li>
+</ul>
+</li>
+<li><strong>查询</strong>
+<ul>
+<li>public Object query(Connection conn, String sql, ResultSetHandler rsh,Object... params) throws SQLException：执行一个查询操作，在这个查询中，对象数组中的每个元素值被用来作为查询语句 的置换参数。该方法会自行处理 PreparedStatement 和 ResultSet 的创建和关闭。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>测试</li>
+</ul>
+<pre><code class="language-java">// 测试添加
+@Test
+public void testInsert() throws Exception {
+    QueryRunner runner = new QueryRunner();
+    Connection conn = JDBCUtils.getConnection3();
+    String sql = &quot;insert into customers(name,email,birth)values(?,?,?)&quot;;
+    int count = runner.update(conn, sql, &quot;何成飞&quot;, &quot;he@qq.com&quot;, &quot;1992-09-08&quot;);
+    System.out.println(&quot;添加了&quot; + count + &quot;条记录&quot;);
+    JDBCUtils.closeResource(conn, null);
+}
+// 测试删除
+@Test
+public void testDelete() throws Exception {
+    QueryRunner runner = new QueryRunner();
+    Connection conn = JDBCUtils.getConnection3();
+    String sql = &quot;delete from customers where id &lt; ?&quot;;
+    int count = runner.update(conn, sql,3);
+    System.out.println(&quot;删除了&quot; + count + &quot;条记录&quot;);
+    JDBCUtils.closeResource(conn, null);
+}
+</code></pre>
+<h4 id="resultsethandler接口及实现类">ResultSetHandler接口及实现类</h4>
+<ul>
+<li>该接口用于处理 java.sql.ResultSet，将数据按要求转换为另一种形式。</li>
+<li>ResultSetHandler 接口提供了一个单独的方法：Object handle (java.sql.ResultSet .rs)。</li>
+<li>接口的主要实现类：
+<ul>
+<li><code>ArrayHandler</code>：把结果集中的第一行数据转成对象数组。</li>
+<li><code>ArrayListHandler</code>：把结果集中的每一行数据都转成一个数组，再存放到List中。</li>
+<li><code>BeanHandler</code>：将结果集中的第一行数据封装到一个对应的JavaBean实例中。</li>
+<li><code>BeanListHandler</code>：将结果集中的每一行数据都封装到一个对应的JavaBean实例中，存放到List里。</li>
+<li><code>ColumnListHandler</code>：将结果集中某一列的数据存放到List中。</li>
+<li><code>KeyedHandler(name)</code>：将结果集中的每一行数据都封装到一个Map里，再把这些map再存到一个map 里，其key为指定的key。</li>
+<li><code>MapHandler</code>：将结果集中的第一行数据封装到一个Map里，key是列名，value就是对应的值。</li>
+<li><code>MapListHandler</code>：将结果集中的每一行数据都封装到一个Map里，然后再存放到List</li>
+<li><code>ScalarHandler</code>：查询单个值对象</li>
+</ul>
+</li>
+<li>测试</li>
+</ul>
+<pre><code class="language-java">/*
+* 测试查询:查询一条记录
+*
+* 使用ResultSetHandler的实现类：BeanHandler
+*/
+@Test
+public void testQueryInstance() throws Exception{
+    QueryRunner runner = new QueryRunner();
+    
+    Connection conn = JDBCUtils.getConnection3();
+    
+    String sql = &quot;select id,name,email,birth from customers where id = ?&quot;;
+    //
+    BeanHandler&lt;Customer&gt; handler = new BeanHandler&lt;&gt;(Customer.class);
+    Customer customer = runner.query(conn, sql, handler, 23);
+    System.out.println(customer);
+    JDBCUtils.closeResource(conn, null);
+}
+/*
+* 测试查询:查询多条记录构成的集合
+*
+* 使用ResultSetHandler的实现类：BeanListHandler
+*/
+@Test
+public void testQueryList() throws Exception{
+    QueryRunner runner = new QueryRunner();
+    Connection conn = JDBCUtils.getConnection3();
+    String sql = &quot;select id,name,email,birth from customers where id &lt; ?&quot;;
+    //
+    BeanListHandler&lt;Customer&gt; handler = new BeanListHandler&lt;&gt;(Customer.class);
+    List&lt;Customer&gt; list = runner.query(conn, sql, handler, 23);
+    list.forEach(System.out::println);
+    JDBCUtils.closeResource(conn, null);
+}
+/*
+* 自定义ResultSetHandler的实现类
+*/
+@Test
+public void testQueryInstance1() throws Exception{
+    QueryRunner runner = new QueryRunner();
+    Connection conn = JDBCUtils.getConnection3();
+    String sql = &quot;select id,name,email,birth from customers where id = ?&quot;;
+    ResultSetHandler&lt;Customer&gt; handler = new ResultSetHandler&lt;Customer&gt;() {
+    @Override
+    public Customer handle(ResultSet rs) throws SQLException {
+    System.out.println(&quot;handle&quot;);
+    // return new Customer(1,&quot;Tom&quot;,&quot;tom@126.com&quot;,new Date(123323432L));
+    if(rs.next()){
+            int id = rs.getInt(&quot;id&quot;);
+            String name = rs.getString(&quot;name&quot;);
+            String email = rs.getString(&quot;email&quot;);
+            Date birth = rs.getDate(&quot;birth&quot;);
+    		return new Customer(id, name, email, birth);
+    	}
+   		 return null;
+    	}
+    };
+    Customer customer = runner.query(conn, sql, handler, 23);
+    System.out.println(customer);
+    JDBCUtils.closeResource(conn, null);
+}
+/*
+* 如何查询类似于最大的，最小的，平均的，总和，个数相关的数据，
+* 使用ScalarHandler
+*
+*/
+@Test
+public void testQueryValue() throws Exception{
+    QueryRunner runner = new QueryRunner();
+    Connection conn = JDBCUtils.getConnection3();
+    //测试一：
+    // String sql = &quot;select count(*) from customers where id &lt; ?&quot;;
+    // ScalarHandler handler = new ScalarHandler();
+    // long count = (long) runner.query(conn, sql, handler, 20);
+    // System.out.println(count);
+    //测试二：
+    String sql = &quot;select max(birth) from customers&quot;;
+    ScalarHandler handler = new ScalarHandler();
+    Date birth = (Date) runner.query(conn, sql, handler);
+    System.out.println(birth);
+    JDBCUtils.closeResource(conn, null);
+}
+</code></pre>
+<h2 id="jdbc总结">JDBC总结</h2>
+<pre><code class="language-java">@Test
+public void testUpdateWithTx() {
+    Connection conn = null;
+    try {
+        //1.获取连接的操作（
+        //① 手写的连接：JDBCUtils.getConnection();
+        //② 使用数据库连接池：C3P0;DBCP;Druid
+        
+        //2.对数据表进行一系列CRUD操作
+        //① 使用PreparedStatement实现通用的增删改、查询操作（version 1.0 \ version 2.0)
+        //version2.0的增删改public void update(Connection conn,String sql,Object ... args){}
+        //version2.0的查询 public &lt;T&gt; T getInstance(Connection conn,Class&lt;T&gt; clazz,Stringsql,Object ... args){}
+        //② 使用dbutils提供的jar包中提供的QueryRunner类
+        
+        //提交数据
+        conn.commit();
+        
+        } catch (Exception e) {
+        e.printStackTrace();
+     
+        try {
+        //回滚数据
+        conn.rollback();
+            
+        } catch (SQLException e1) {
+        e1.printStackTrace();
+        }
+        
+     }finally{
+        //3.关闭连接等操作
+        //① JDBCUtils.closeResource();
+        //② 使用dbutils提供的jar包中提供的DbUtils类提供了关闭的相关操作
+      }
+}
+</code></pre>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/tumblr_4367c0920e509941859ff81f3285b894_bd1cb190_2048.jpg');"></div>
+                 <a href="https://nanteng.github.io/post/spring5-kuang-jia/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2022-11-07">2022-11-07</time>
+                  <h4 class="title white no-margin">Spring5框架</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://nanteng.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com//halo//%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220309194726_1646826592564.jpg');"></div>
+                 <a href="https://nanteng.github.io/post/童谣-tong-yao/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2022-03-09">2022-03-09</time>
+                  <h4 class="title white no-margin">童谣</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://nanteng.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                <div class="clear"></div>
+<script>
+jQuery(document).ready(function($){
+    $('.vemoji-btn').text('😀');
+    $("#comments").on('click', 'span.vat',function(){
+        $(this).parent('div.vmeta').next("div.vcontent").after($("div.vwrap"));
+        $('textarea#veditor').focus();
+    })
+    if(window.location.hash){
+        var checkExist = setInterval(function() {
+            if ($(window.location.hash).length) {
+                $('html, body').animate({scrollTop: $(window.location.hash).offset().top-200}, 600);
+                clearInterval(checkExist);
+            }
+        }, 100);
+    }
+})
+</script>
+
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://nanteng.github.io/post/mavenbasics/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/tumblr_b38009612775acb3f606c15e4ca4cfb0_9b8bb164_1280.png');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2022-11-16">2022-11-16</time>
+                      <h4 class="title usmall">
+                        <a href="https://nanteng.github.io/post/mavenbasics/">MavenBasics</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://nanteng.github.io/post/ssm-zheng-he/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/お豆腐_99167071.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2022-11-15">2022-11-15</time>
+                      <h4 class="title usmall">
+                        <a href="https://nanteng.github.io/post/ssm-zheng-he/">SSM整合</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://nanteng.github.io/post/springmvc/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/20221112_004658.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2022-11-15">2022-11-15</time>
+                      <h4 class="title usmall">
+                        <a href="https://nanteng.github.io/post/springmvc/">SpringMVC</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://nanteng.github.io/tag/TtKdK6ur-/" class="ctag ctag-0 ctag-TtKdK6ur-" aria-label="">Java</a>
+                    
+                      <a href="https://nanteng.github.io/tag/Pb31zuZQs/" class="ctag ctag-1 ctag-Pb31zuZQs" aria-label="">诗歌</a>
+                    
+                      <a href="https://nanteng.github.io/tag/wFMTkH_sNe/" class="ctag ctag-2 ctag-wFMTkH_sNe" aria-label="">日记</a>
+                    
+                      <a href="https://nanteng.github.io/tag/q1drPjJv3/" class="ctag ctag-3 ctag-q1drPjJv3" aria-label="">随笔</a>
+                    
+                      <a href="https://nanteng.github.io/tag/eSKuLZlYEN/" class="ctag ctag-4 ctag-eSKuLZlYEN" aria-label="">Linux</a>
+                    
+                      <a href="https://nanteng.github.io/tag/i9Zqgezw0Q/" class="ctag ctag-5 ctag-i9Zqgezw0Q" aria-label="">体验</a>
+                    
+                      <a href="https://nanteng.github.io/tag/VxnVWpClHS/" class="ctag ctag-6 ctag-VxnVWpClHS" aria-label="">软件</a>
+                    
+                      <a href="https://nanteng.github.io/tag/1DZ-nCoLTA/" class="ctag ctag-7 ctag-1DZ-nCoLTA" aria-label="">信件</a>
+                    
+                      <a href="https://nanteng.github.io/tag/Fcf3eo9iSf/" class="ctag ctag-8 ctag-Fcf3eo9iSf" aria-label="">CentOS</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://nanteng.github.io/images/avatar.png);"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">南藤北玄参</a></h4>
+                    <p class="founder">唯沉默为最高的轻蔑</p>
+                    <div class="social">
+                      
+                          
+                            <a href="https://github.com/NanTeng" class="translate-effect" target="_blank"><i class="fa fa-github"></i></a>
+                        
+                      
+                          
+                            <a href="https://twitter.com/NanTeng418" class="translate-effect" target="_blank"><i class="fa fa-twitter"></i></a>
+                        
+                      
+                        
+                      
+                          
+                            <a href="https://t.me/NanTeng" class="translate-effect" target="_blank"><i class="fa fa-telegram"></i></a>
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="logo">
+          <a href="https://nanteng.github.io"><img src="\media\images\custom-footerLogo.gif" alt=""></a>
+        </div>
+        <p class="published border-effect">
+          ©2019 共 28 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    
+    <div class="clear"></div>
+
+        
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/valine/1.3.10/Valine.Pure.min.js"></script>
+<script>
+    new Valine({
+        el: '#comments',
+        appId: 'JCYzcWAfC7BkMZHJ3hrKx85t-gzGzoHsz' ,
+        appKey: 'r89Wpg7b2oYFtiu1JGnthBzN',
+        pageSize: 30,
+        placeholder: '既然来了，那就留个痕迹吧~',
+        visitor: true // 阅读量统计
+    })
+</script>
+    
+
+      
+    <script src="https://nanteng.github.io/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>

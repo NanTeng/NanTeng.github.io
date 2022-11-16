@@ -1,0 +1,790 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aria2配合rclone实现伪离线下载 | 南藤北玄参</title>
+<meta name="description" content="唯沉默为最高的轻蔑" />
+<link rel="shortcut icon" href="https://nanteng.github.io/favicon.ico">
+<link rel="stylesheet" href="https://nanteng.github.io/styles/main.css">
+
+<script src="https://nanteng.github.io/media/js/jquery.min.js"></script>
+<script src="https://nanteng.github.io/media/js/masonry.pkgd.min.js"></script>
+<script src="https://nanteng.github.io/media/js/aos.js"></script>
+<script src="https://nanteng.github.io/media/js/pace.min.js"></script>
+<script src="https://nanteng.github.io/media/js/view-image.min.js"></script>
+<script src="https://nanteng.github.io/media/js/jquery.magnific-popup.min.js"></script>
+<script src="https://nanteng.github.io/media/js/functions.js"></script>
+    <meta name="referrer" content="never">
+    <meta name="description" content="Aria2是一款非常强大的下载工具，支持多种下载协议，各种好处多不胜数。具体和参考P3TERX大神的博客，以及他的Github开源代码。
+本文的服务器操作系统为CentOS7
+首先更新系统内核
+yum update  #CentOS
+apt..." />
+    <meta name="keywords" content="Linux" />
+    <script src="https://nanteng.github.io/media/js/waterfall.min.js"></script>
+    <script src="https://nanteng.github.io/media/js/prism.min.js"></script>
+  </head>
+  <body>
+            <header id="header" class="grid-container">
+        <!-- start: .menu-wrapper -->
+        <div class="menu-mobile"> 
+          <i class="fa fa-reorder"></i>
+        </div>
+        <div class="menu-wrapper">
+          <div class="">
+            <div class="logo">
+              <a href="https://nanteng.github.io"><img src="\media\images\custom-headerLogo.gif" alt=""></a>
+            </div>
+            <!-- start: .main-nav -->
+
+            <nav class="main-nav grid-container grid-parent">
+              <ul id="menu-header" class="menu gradient-effect">
+                <li class=""><a href="https://nanteng.github.io" class="menu">首页</a></li>
+                
+                  <li class="" >
+                    <a href="/archives" class="menu">
+                      归档
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/tags" class="menu">
+                      标签
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="https://cloud.dearkai.cn" class="menu">
+                      云盘
+                    </a>
+                  </li>
+                
+                  <li class="" >
+                    <a href="/post/about" class="menu">
+                      关于
+                    </a>
+                  </li>
+                
+                <li class="search-menu-item hide-on-mobile hide-on-tablet"><a href="#search-lightbox" class="lightbox mfp-inline"><i class="fa fa-search-line"></i></a></li>
+              </ul>
+            </nav>
+            <a href="#search-lightbox" class="lightbox epcl-search-button mfp-inline hide-on-tablet hide-on-desktop"><i class="fa fa-search-line"></i></a>
+            <!-- end: .main-nav -->
+            <div class="clear"></div>
+            <div class="border hide-on-tablet hide-on-mobile"></div>
+          </div>    
+          <div class="clear"></div>
+        </div>
+        <!-- end: .menu-wrapper -->
+        <div class="clear"></div>
+      </header>
+      <div class="hide-on-mobile hide-on-tablet hide-on-desktop">
+        <div id="search-lightbox" class="grid-container grid-small grid-parent mfp-hide">
+          <div class="search-wrapper section">
+            <form id="gridea-search-form" data-update="1668567925322" action="/search/index.html" class="search-form" _lpchecked="1">
+              <input type="text" name="q" id="s" value="" class="search-field" placeholder="搜点啥..." aria-label="搜点啥..." required="">
+              <button type="submit" class="submit" aria-label="Submit">
+                <i class="fa fa-search-line"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
+
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com//halo//%E4%B8%80%E9%A2%97%E9%9D%92_63460444_1640711367880.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2021-12-20"><i class="fa fa-calendar"></i><span class="lately">1 年前</span></time>
+              
+              <a href="https://nanteng.github.io/post/Aria2配合rclone实现伪离线下载-aria2-pei-he-rclone-shi-xian-wei-li-xian-xia-zai/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/Aria2配合rclone实现伪离线下载-aria2-pei-he-rclone-shi-xian-wei-li-xian-xia-zai/"> </span>
+              </a>
+              <span id="/Aria2配合rclone实现伪离线下载-aria2-pei-he-rclone-shi-xian-wei-li-xian-xia-zai/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
+            </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://nanteng.github.io/tag/eSKuLZlYEN/" class="ctag ctag-0 ctag-eSKuLZlYEN" aria-label="">Linux</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">Aria2配合rclone实现伪离线下载</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <p>Aria2是一款非常强大的下载工具，支持多种下载协议，各种好处多不胜数。具体和参考<a href="http://p3terx.com">P3TERX</a>大神的博客，以及他的<a href="https://github.com/P3TERX/docker-aria2-pro">Github开源代码</a>。</p>
+<p>本文的服务器操作系统为CentOS7</p>
+<h3 id="首先更新系统内核">首先更新系统内核</h3>
+<pre><code class="language-bash">yum update  #CentOS
+apt-get update #Debian
+</code></pre>
+<h3 id="下载安装docker">下载安装Docker</h3>
+<pre><code class="language-bash">yum install -y yum-utils device-mapper-persistent-data lvm2    //安装必要工具
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo //设置yum源
+yum install -y docker-ce  //下载docker
+systemctl start docker   //启动docker
+
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun #Debian为
+</code></pre>
+<h3 id="安装rclone可选">安装Rclone（可选）</h3>
+<p><a href="https://rclone.org/install/#script-installation">官方安装脚本</a></p>
+<pre><code class="language-bash">curl https://rclone.org/install.sh | bash #CentOS
+wget https://www.moerats.com/usr/shell/rclone_debian.sh &amp;&amp; bash rclone_debian.sh #Debian
+
+</code></pre>
+<pre><code class="language-bash">yum -y install unzip
+</code></pre>
+<h3 id="安装fuse管理挂载目录">安装fuse管理挂载目录</h3>
+<pre><code class="language-bash">apt-get update &amp;&amp; apt-get install -y fuse # Debian
+
+yum install -y fuse # CentOS
+</code></pre>
+<h3 id="复制rcloneconf文件">复制rclone.conf文件</h3>
+<ul>
+<li>
+<p>1.用本地的Windows下载rclone</p>
+<figure data-type="image" tabindex="1"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com//halo//%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20211220144958_1639993905475.png" alt="微信图片_20211220144958.png" loading="lazy"></figure>
+<p>并解压到你记得的文件夹（参考）</p>
+<figure data-type="image" tabindex="2"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com//halo//%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20211220145211_1639993937179.png" alt="微信截图_20211220145211.png" loading="lazy"></figure>
+<p>2.键盘按<code>Win+X</code>键再按<code>A</code> 进入<code>Windows PowerShell</code></p>
+<figure data-type="image" tabindex="3"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com//halo//%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20211220145534_1639993996396.png" alt="微信截图_20211220145534.png" loading="lazy"></figure>
+<p>3.先获取到Token（参考）</p>
+<figure data-type="image" tabindex="4"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com//halo//%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20211220150727_1639994008783.png" alt="微信截图_20211220150727.png" loading="lazy"></figure>
+<p>保存<code>{&quot;access_token&quot;:&quot;xxxxxxxx&quot;}</code>中的内容</p>
+<p>4.（参考）</p>
+<pre><code class="language-bash">PS C:\Windows\system32&gt; D:
+PS D:\&gt; CD D:\rclone-v1.56.2-windows-amd64
+PS D:\rclone-v1.56.2-windows-amd64&gt; rclone authorize &quot;onedrive&quot;
+2021/12/20 15:03:04 NOTICE: If your browser doesn't open automatically go to the following link: http://127.0.0.1:53682/auth?state=jZ1Gb3silUw2FQLcx448bA
+2021/12/20 15:03:04 NOTICE: Log in and authorize rclone for access
+2021/12/20 15:03:04 NOTICE: Waiting for code...
+2021/12/20 15:04:14 NOTICE: Got code
+Paste the following into your remote machine ---&gt;
+{&quot;access_token&quot;:&quot;xxxxxxx&quot;}
+&lt;---End paste
+PS D:\rclone-v1.56.2-windows-amd64&gt; rclone config
+Current remotes:
+
+Name                 Type
+====                 ====
+googledrive          drive
+onedrive             onedrive
+ye1                  onedrive
+
+e) Edit existing remote
+n) New remote
+d) Delete remote
+r) Rename remote
+c) Copy remote
+s) Set configuration password
+q) Quit config
+e/n/d/r/c/s/q&gt; n #输入n
+name&gt; ye2  #自定义
+Type of storage to configure.
+Enter a string value. Press Enter for the default (&quot;&quot;).
+Choose a number from below, or type in your own value
+ 1 / 1Fichier
+   \ &quot;fichier&quot;
+ 2 / Alias for an existing remote
+   \ &quot;alias&quot;
+ 3 / Amazon Drive
+   \ &quot;amazon cloud drive&quot;
+ 4 / Amazon S3 Compliant Storage Providers including AWS, Alibaba, Ceph, Digital Ocean, Dreamhost, IBM COS, Minio, SeaweedFS, and Tencent COS
+   \ &quot;s3&quot;
+ 5 / Backblaze B2
+   \ &quot;b2&quot;
+ 6 / Box
+   \ &quot;box&quot;
+ 7 / Cache a remote
+   \ &quot;cache&quot;
+ 8 / Citrix Sharefile
+   \ &quot;sharefile&quot;
+ 9 / Compress a remote
+   \ &quot;compress&quot;
+10 / Dropbox
+   \ &quot;dropbox&quot;
+11 / Encrypt/Decrypt a remote
+   \ &quot;crypt&quot;
+12 / Enterprise File Fabric
+   \ &quot;filefabric&quot;
+13 / FTP Connection
+   \ &quot;ftp&quot;
+14 / Google Cloud Storage (this is not Google Drive)
+   \ &quot;google cloud storage&quot;
+15 / Google Drive
+   \ &quot;drive&quot;
+16 / Google Photos
+   \ &quot;google photos&quot;
+17 / Hadoop distributed file system
+   \ &quot;hdfs&quot;
+18 / Hubic
+   \ &quot;hubic&quot;
+19 / In memory object storage system.
+   \ &quot;memory&quot;
+20 / Jottacloud
+   \ &quot;jottacloud&quot;
+21 / Koofr
+   \ &quot;koofr&quot;
+22 / Local Disk
+   \ &quot;local&quot;
+23 / Mail.ru Cloud
+   \ &quot;mailru&quot;
+24 / Mega
+   \ &quot;mega&quot;
+25 / Microsoft Azure Blob Storage
+   \ &quot;azureblob&quot;
+26 / Microsoft OneDrive
+   \ &quot;onedrive&quot;
+27 / OpenDrive
+   \ &quot;opendrive&quot;
+28 / OpenStack Swift (Rackspace Cloud Files, Memset Memstore, OVH)
+   \ &quot;swift&quot;
+29 / Pcloud
+   \ &quot;pcloud&quot;
+30 / Put.io
+   \ &quot;putio&quot;
+31 / QingCloud Object Storage
+   \ &quot;qingstor&quot;
+32 / SSH/SFTP Connection
+   \ &quot;sftp&quot;
+33 / Sugarsync
+   \ &quot;sugarsync&quot;
+34 / Tardigrade Decentralized Cloud Storage
+   \ &quot;tardigrade&quot;
+35 / Transparently chunk/split large files
+   \ &quot;chunker&quot;
+36 / Union merges the contents of several upstream fs
+   \ &quot;union&quot;
+37 / Uptobox
+   \ &quot;uptobox&quot;
+38 / Webdav
+   \ &quot;webdav&quot;
+39 / Yandex Disk
+   \ &quot;yandex&quot;
+40 / Zoho
+   \ &quot;zoho&quot;
+41 / http Connection
+   \ &quot;http&quot;
+42 / premiumize.me
+   \ &quot;premiumizeme&quot;
+43 / seafile
+   \ &quot;seafile&quot;
+Storage&gt; 26 #选择26Microsoft onedrive 编号会变不固定，看准了填
+OAuth Client Id
+Leave blank normally.
+Enter a string value. Press Enter for the default (&quot;&quot;).
+client_id&gt;  #回车
+OAuth Client Secret
+Leave blank normally.
+Enter a string value. Press Enter for the default (&quot;&quot;).
+client_secret&gt; #回车
+Choose national cloud region for OneDrive.
+Enter a string value. Press Enter for the default (&quot;global&quot;).
+Choose a number from below, or type in your own value
+ 1 / Microsoft Cloud Global
+   \ &quot;global&quot;
+ 2 / Microsoft Cloud for US Government
+   \ &quot;us&quot;
+ 3 / Microsoft Cloud Germany
+   \ &quot;de&quot;
+ 4 / Azure and Office 365 operated by 21Vianet in China
+   \ &quot;cn&quot;
+region&gt; 1 #按实际情况填写
+Edit advanced config?
+y) Yes
+n) No (default)
+y/n&gt; n   #不需要
+Use auto config?
+ * Say Y if not sure
+ * Say N if you are working on a remote or headless machine
+
+y) Yes (default)
+n) No
+y/n&gt; n     #不用
+For this to work, you will need rclone available on a machine that has
+a web browser available.
+
+For more help and alternate methods see: https://rclone.org/remote_setup/
+
+Execute the following on the machine with the web browser (same rclone
+version recommended):
+
+        rclone authorize &quot;onedrive&quot;
+
+Then paste the result.
+
+Enter a string value. Press Enter for the default (&quot;&quot;).
+config_token&gt; {&quot;access_token&quot;:&quot;XXXXXX&quot;} #这里输入保存的内容
+Type of connection
+Enter a string value. Press Enter for the default (&quot;onedrive&quot;).
+Choose a number from below, or type in an existing value
+ 1 / OneDrive Personal or Business
+   \ &quot;onedrive&quot;
+ 2 / Root Sharepoint site
+   \ &quot;sharepoint&quot;
+ 3 / Sharepoint site name or URL (e.g. mysite or https://contoso.sharepoint.com/sites/mysite)
+   \ &quot;url&quot;
+ 4 / Search for a Sharepoint site
+   \ &quot;search&quot;
+ 5 / Type in driveID (advanced)
+   \ &quot;driveid&quot;
+ 6 / Type in SiteID (advanced)
+   \ &quot;siteid&quot;
+ 7 / Sharepoint server-relative path (advanced, e.g. /teams/hr)
+   \ &quot;path&quot;
+config_type&gt; 1  #选类型1
+Drive OK?
+
+Found drive &quot;root&quot; of type &quot;business&quot;
+URL: https://dearkai-my.sharepoint.com/personal/ye2_dearkai_onmicrosoft_com/Documents
+
+y) Yes (default)
+n) No
+y/n&gt; y  #选y
+--------------------
+[ye2]
+type = onedrive
+token = {&quot;access_token&quot;:&quot;xxxxxx&quot;}
+drive_id = xxxxx
+drive_type = xxxxx
+--------------------
+y) Yes this is OK (default)
+e) Edit this remote
+d) Delete this remote
+y/e/d&gt; y #y
+Current remotes:
+
+Name                 Type
+====                 ====
+googledrive          drive
+onedrive             onedrive
+ye1                  onedrive
+ye2                  onedrive
+
+e) Edit existing remote
+n) New remote
+d) Delete remote
+r) Rename remote
+c) Copy remote
+s) Set configuration password
+q) Quit config
+e/n/d/r/c/s/q&gt;
+</code></pre>
+<p>5.完成后<code>C:\Users\User\AppData\Roaming\rclone</code> 目录下</p>
+<figure data-type="image" tabindex="5"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com//halo//%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20211220180232_1639994630486.png" alt="微信截图_20211220180232.png" loading="lazy"></figure>
+<p>复制<code>rclone.conf</code>文件到服务器<code>/root/.config/rclone</code>目录下，没有请自己创建</p>
+<p>6.服务器输入<code>rclone config</code>确认</p>
+<figure data-type="image" tabindex="6"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com//halo//%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20211220154133_1639994061060.png" alt="微信截图_20211220154133.png" loading="lazy"></figure>
+</li>
+</ul>
+<h3 id="挂载网盘可选">挂载网盘（可选）</h3>
+<ol>
+<li>
+<p>回到你想创建挂载Onedrive的目录创建文件夹</p>
+<pre><code class="language-bash">cd .. #我选择在根目录创建
+mkdir OneDrove2
+</code></pre>
+<figure data-type="image" tabindex="7"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com//halo//%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20211220170920_1639994135600.png" alt="微信截图_20211220170920.png" loading="lazy"></figure>
+</li>
+<li>
+<p>手动挂载</p>
+<pre><code class="language-bash">#挂载
+rclone mount &lt;网盘名称:网盘路径&gt; &lt;本地路径&gt; [参数] --daemon
+
+#取消挂载
+fusermount -qzu &lt;本地路径&gt;
+#例：
+rclone mount ye2:/ /OneDrive2 --copy-links --allow-other --allow-non-empty --umask 000 --daemon
+#取消挂载
+fusermount -qzu /Onedrive2
+</code></pre>
+<p>输入<code>df -h</code>查看挂载状态</p>
+<figure data-type="image" tabindex="8"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com//halo//Untitled_1639994150590.png" alt="Untitled.png" loading="lazy"></figure>
+</li>
+<li>
+<p>自动挂载</p>
+<ul>
+<li>
+<p>下载脚本编辑</p>
+<pre><code class="language-bash">wget -N git.io/rcloned &amp;&amp; nano rcloned
+</code></pre>
+</li>
+<li>
+<p>修改内容：</p>
+<pre><code>NAME=&quot;ye2&quot; #Rclone配置时填写的name
+REMOTE=''  #远程文件夹，网盘里的挂载的一个文件夹，留空为整个网盘
+LOCAL='/OneDrive2'  #挂载地址，VPS本地挂载目录
+</code></pre>
+</li>
+<li>
+<p>设置开机自启</p>
+<pre><code>mv rcloned /etc/init.d/rcloned
+chmod +x /etc/init.d/rcloned
+update-rc.d -f rcloned defaults # Debian
+chkconfig rcloned on # CentOS
+bash /etc/init.d/rcloned start
+</code></pre>
+</li>
+</ul>
+<p>看到 <code>[信息] rclone 启动成功 !</code> 即可。</p>
+<h3 id="管理">管理</h3>
+<p>开始挂载 <code>bash /etc/init.d/rcloned start</code></p>
+<p>停止挂载 <code>bash /etc/init.d/rcloned stop</code></p>
+<p>重新挂载 <code>bash /etc/init.d/rcloned restart</code></p>
+<p>查看日志 <code>tail -f /$HOME/.rclone/rcloned.log</code></p>
+<h3 id="卸载自启挂载">卸载自启挂载</h3>
+<pre><code>bash /etc/init.d/rcloned stop
+update-rc.d -f rcloned remove # Debian/Ubuntu
+chkconfig rcloned off # CentOS
+rm -f /etc/init.d/rcloned
+</code></pre>
+</li>
+</ol>
+<h3 id="安装aria2-prop3terx大佬的">安装Aria2-Pro(<a href="https://github.com/Twtcer/docker-aria2-pro">P3TERX大佬的</a>)</h3>
+<ol>
+<li>
+<p>Docker容器部署（可选）开放本机的6888,6800端口，TCP，UDP都要打开</p>
+<pre><code class="language-bash">docker run -d \
+    --name aria2-pro \
+    --restart unless-stopped \
+    --log-opt max-size=1m \
+    --network host \
+    -e PUID=$UID \
+    -e PGID=$GID \
+    -e RPC_SECRET=xxxx \ #这里的TOKEY更改为你想设置的，有用
+    -e RPC_PORT=6800 \
+    -e LISTEN_PORT=6888 \
+    -v ~/aria2-config:/config \
+    -v ~/rclone-downloads:/downloads \
+    -e SPECIAL_MODE=rclone \  #👈
+    p3terx/aria2-pro
+</code></pre>
+<p>启动命令加入<code>e SPECIAL_MODE=rclone</code>参数设定特殊模式环境变量后开启 RCLONE 自动上传功能，容器初次启动会安装 RCLONE ，且每次重启会自动更新 RCLONE。</p>
+</li>
+<li>
+<p>设置Aira2-Pro</p>
+<p><code>vim /root/aria2-config/script.conf</code> 编辑<code>script.conf</code></p>
+<figure data-type="image" tabindex="9"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com//halo//Untitled%201_1639994281291.png" alt="Untitled 1.png" loading="lazy"></figure>
+<p>修改 <code>dirve-name=xxx</code> 和 <code>drive-dir=/xxx</code> （请自己去除注释符）更改完记得<code>重启Aria2-Pro</code></p>
+</li>
+</ol>
+<h3 id="安装前端面板ariang">安装前端面板AriaNG</h3>
+<ol>
+<li>
+<p>这里我们依旧用DocKer安装</p>
+<pre><code class="language-bash"># bridge 网络模式
+docker run -d \
+    --name ariang \
+    --restart unless-stopped \
+    --log-opt max-size=1m \
+    -p 6880:6880 \
+    p3terx/ariang
+
+# host 网络模式（如果你需要使用 IPv6 网络访问，这是最简单的方式）
+docker run -d \
+    --name ariang \
+    --log-opt max-size=1m \
+    --restart unless-stopped \
+    --network host \
+    p3terx/ariang --port 6880 --ipv6 
+</code></pre>
+</li>
+<li>
+<p>安装完成后我们通过<a href="http://ip:6880"><code>http://ip:6880</code></a> 访问 AriaNG</p>
+<figure data-type="image" tabindex="10"><img src="https://dearkai.oss-cn-beijing.aliyuncs.com//halo//Untitled%202_1639994212804.png" alt="在步骤 3 填写你  的 " loading="lazy"></figure>
+<p>在步骤 3 填写你 <code>Aria2-Pro</code> 的 <code>ToKen</code></p>
+</li>
+<li>
+<p>补充：如果连接不上请再次确认你端口已经开放</p>
+<ul>
+<li>如果不想使用DoCker可以使用Aria2的脚本安装</li>
+</ul>
+</li>
+</ol>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com//halo//%E5%90%9B%E3%81%AF%E6%99%82%E3%81%AE%E3%81%AA%E3%81%84%E9%9F%B3%E3%82%92%E4%BF%9D%E3%81%A3%E3%81%A6_94891174_1640710999059.jpg');"></div>
+                 <a href="https://nanteng.github.io/post/不为谁而作的诗-bu-wei-shui-er-zuo-de-shi/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-12-27">2021-12-27</time>
+                  <h4 class="title white no-margin">不为谁而作的诗</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://nanteng.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com//halo//so_in_the_basement_80319335_1638449276021.png');"></div>
+                 <a href="https://nanteng.github.io/post/系红领巾的少年-xi-hong-ling-jin-de-shao-nian/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-12-02">2021-12-02</time>
+                  <h4 class="title white no-margin">系红领巾的少年</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://nanteng.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
+            
+              <div id="comments" class="bg-white hosted ">
+                <div class="clear"></div>
+<script>
+jQuery(document).ready(function($){
+    $('.vemoji-btn').text('😀');
+    $("#comments").on('click', 'span.vat',function(){
+        $(this).parent('div.vmeta').next("div.vcontent").after($("div.vwrap"));
+        $('textarea#veditor').focus();
+    })
+    if(window.location.hash){
+        var checkExist = setInterval(function() {
+            if ($(window.location.hash).length) {
+                $('html, body').animate({scrollTop: $(window.location.hash).offset().top-200}, 600);
+                clearInterval(checkExist);
+            }
+        }, 100);
+    }
+})
+</script>
+
+              </div>
+            
+
+            </div>
+          </div>
+      </main>
+
+          <footer id="footer" class="grid-container">
+        <div class="widgets row gradient-effect">
+            <div class="default-sidebar border-effect">
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_epcl_posts_thumbs underline-effect">
+                  <h4 class="widget-title title white bordered">最新文章</h4>
+                  
+                  
+                  <article class="item post-0 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://nanteng.github.io/post/mavenbasics/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/tumblr_b38009612775acb3f606c15e4ca4cfb0_9b8bb164_1280.png');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2022-11-16">2022-11-16</time>
+                      <h4 class="title usmall">
+                        <a href="https://nanteng.github.io/post/mavenbasics/">MavenBasics</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-1 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://nanteng.github.io/post/ssm-zheng-he/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/お豆腐_99167071.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2022-11-15">2022-11-15</time>
+                      <h4 class="title usmall">
+                        <a href="https://nanteng.github.io/post/ssm-zheng-he/">SSM整合</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  <article class="item post-2 post type-post status-publish format-standard has-post-thumbnail hentry">
+                    <a href="https://nanteng.github.io/post/springmvc/" class="thumb hover-effect">
+                      <span class="fullimage cover" style="display:block;border-radius:50%;background-image: url('https://dearkai.oss-cn-beijing.aliyuncs.com/typora-img/20221112_004658.jpg');"></span>
+                    </a>
+                    <div class="info gradient-effect">
+                      <time datetime="2022-11-15">2022-11-15</time>
+                      <h4 class="title usmall">
+                        <a href="https://nanteng.github.io/post/springmvc/">SpringMVC</a>
+                      </h4>
+                    </div>
+                    <div class="clear"></div>
+                  </article>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="tag_cloud-2" class="widget widget_tag_cloud underline-effect">
+                  <h4 class="widget-title title white bordered">标签云</h4>
+                  <div class="tagcloud">
+                    
+                      <a href="https://nanteng.github.io/tag/TtKdK6ur-/" class="ctag ctag-0 ctag-TtKdK6ur-" aria-label="">Java</a>
+                    
+                      <a href="https://nanteng.github.io/tag/Pb31zuZQs/" class="ctag ctag-1 ctag-Pb31zuZQs" aria-label="">诗歌</a>
+                    
+                      <a href="https://nanteng.github.io/tag/wFMTkH_sNe/" class="ctag ctag-2 ctag-wFMTkH_sNe" aria-label="">日记</a>
+                    
+                      <a href="https://nanteng.github.io/tag/q1drPjJv3/" class="ctag ctag-3 ctag-q1drPjJv3" aria-label="">随笔</a>
+                    
+                      <a href="https://nanteng.github.io/tag/eSKuLZlYEN/" class="ctag ctag-4 ctag-eSKuLZlYEN" aria-label="">Linux</a>
+                    
+                      <a href="https://nanteng.github.io/tag/i9Zqgezw0Q/" class="ctag ctag-5 ctag-i9Zqgezw0Q" aria-label="">体验</a>
+                    
+                      <a href="https://nanteng.github.io/tag/VxnVWpClHS/" class="ctag ctag-6 ctag-VxnVWpClHS" aria-label="">软件</a>
+                    
+                      <a href="https://nanteng.github.io/tag/1DZ-nCoLTA/" class="ctag ctag-7 ctag-1DZ-nCoLTA" aria-label="">信件</a>
+                    
+                      <a href="https://nanteng.github.io/tag/Fcf3eo9iSf/" class="ctag ctag-8 ctag-Fcf3eo9iSf" aria-label="">CentOS</a>
+                    
+                  </div>
+                  <div class="clear"></div>
+                </section>
+              </div>
+
+              <div class="grid-33 tablet-grid-50 mobile-grid-100">
+                <section id="epcl_about-2" class="widget widget_epcl_about underline-effect">
+                  <h4 class="widget-title title white bordered">关于我</h4>
+                  <div class="avatar">
+                    <a href="" class="translate-effect thumb"><span class="fullimage cover" style="background-image: url(https://nanteng.github.io/images/avatar.png);"></span></a>
+                  </div>
+                  <div class="info">
+                    <h4 class="title small author-name gradient-effect no-margin"><a href="">南藤北玄参</a></h4>
+                    <p class="founder">唯沉默为最高的轻蔑</p>
+                    <div class="social">
+                      
+                          
+                            <a href="https://github.com/NanTeng" class="translate-effect" target="_blank"><i class="fa fa-github"></i></a>
+                        
+                      
+                          
+                            <a href="https://twitter.com/NanTeng418" class="translate-effect" target="_blank"><i class="fa fa-twitter"></i></a>
+                        
+                      
+                        
+                      
+                          
+                            <a href="https://t.me/NanTeng" class="translate-effect" target="_blank"><i class="fa fa-telegram"></i></a>
+                        
+                      
+                        
+                      
+                    </div> 
+                  </div>
+                  <div class="clear"></div>
+                  </section>
+              </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="logo">
+          <a href="https://nanteng.github.io"><img src="\media\images\custom-footerLogo.gif" alt=""></a>
+        </div>
+        <p class="published border-effect">
+          ©2019 共 28 篇文章
+          <br/>
+          Theme <a href="https://gridea.dev/" target="_blank">「breek」</a> Powered by <a href="https://gridea.dev/" target="_blank">「Gridea」</a>
+        </p>
+        
+        <a href="javascript:void(0)" id="back-to-top" class="epcl-button dark" style="display:none">
+          <i class="fa fa-arrow"></i>
+        </a>
+    </footer>
+    
+    <div class="clear"></div>
+
+        
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/leancloud-storage/dist/av-min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/valine/1.3.10/Valine.Pure.min.js"></script>
+<script>
+    new Valine({
+        el: '#comments',
+        appId: 'JCYzcWAfC7BkMZHJ3hrKx85t-gzGzoHsz' ,
+        appKey: 'r89Wpg7b2oYFtiu1JGnthBzN',
+        pageSize: 30,
+        placeholder: '既然来了，那就留个痕迹吧~',
+        visitor: true // 阅读量统计
+    })
+</script>
+    
+
+      
+    <script src="https://nanteng.github.io/media/js/functions-post.js"></script>
+
+    </div>
+    <!-- end: #wrapper -->
+  </body>
+</html>
